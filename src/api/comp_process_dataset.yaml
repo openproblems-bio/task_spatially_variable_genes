@@ -1,22 +1,18 @@
-namespace: "data_processors"
+namespace: "process_dataset"
 info:
-  type: data_processor
+  type: process_dataset
   type_info:
     label: Data processor
-    summary: A data processor.
+    summary: A spatially variable genes dataset processor.
     description: |
-      A component for processing a Common Dataset into a task-specific dataset.
+      Prepare a common dataset for the spatially_variable_genes task.
 arguments:
   - name: "--input"
     __merge__: file_common_dataset.yaml
     direction: input
     required: true
-  - name: "--output_train"
-    __merge__: file_train_h5ad.yaml
-    direction: output
-    required: true
-  - name: "--output_test"
-    __merge__: file_test_h5ad.yaml
+  - name: "--output_dataset"
+    __merge__: file_dataset.yaml
     direction: output
     required: true
   - name: "--output_solution"
@@ -24,8 +20,8 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - path: /resources_test/common/pancreas
-    dest: resources_test/common/pancreas
+test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-      
+  - path: /resources_test/common/mouse_brain_coronal_section1
+    dest: resources_test/common/mouse_brain_coronal_section1

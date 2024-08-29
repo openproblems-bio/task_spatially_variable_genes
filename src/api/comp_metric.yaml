@@ -3,16 +3,16 @@ info:
   type: metric
   type_info:
     label: Metric
-    summary: A task template metric.
+    summary: A spatially variable genes identification metric.  
     description: |
-      A metric for evaluating method predictions.
+      A metric for evaluating accuracy spatially variable genes identification
 arguments:
-  - name: "--input_solution"
-    __merge__: file_solution.yaml
+  - name: "--input_method"
+    __merge__: file_output.yaml
     direction: input
     required: true
-  - name: "--input_prediction"
-    __merge__: file_prediction.yaml
+  - name: "--input_solution"
+    __merge__: file_solution.yaml
     direction: input
     required: true
   - name: "--output"
@@ -21,8 +21,10 @@ arguments:
     required: true
 test_resources:
   - type: python_script
-    path: /common/component_tests/run_and_check_output.py
-  - type: python_script
     path: /common/component_tests/check_config.py
-  - path: /resources_test/task_template/pancreas
-    dest: resources_test/task_template/pancreas
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+  - path: /resources_test/spatially_variable_genes/mouse_brain_coronal_section1
+    dest: resources_test/spatially_variable_genes/mouse_brain_coronal_section1
+  - path: /common/library.bib
+      

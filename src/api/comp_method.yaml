@@ -3,26 +3,22 @@ info:
   type: method
   type_info:
     label: Method
-    summary: A method.
-    description: |
-      A method to predict the task effects.
+    summary: A spatially variable gene identification method.
+    description: "Method to identify spatially variable genes"
 arguments:
-  - name: --input_train
-    __merge__: file_train_h5ad.yaml
-    required: true
-    direction: input
-  - name: "--input_test"
-    __merge__: file_test_h5ad.yaml
+  - name: "--input_data"
+    __merge__: file_dataset.yaml
     direction: input
     required: true
-  - name: --output
-    __merge__: file_prediction.yaml
-    required: true
+  - name: "--output"
+    __merge__: file_output.yaml
     direction: output
+    required: true
 test_resources:
   - type: python_script
-    path: /common/component_tests/run_and_check_output.py
-  - type: python_script
     path: /common/component_tests/check_config.py
-  - path: /resources_test/task_template/pancreas
-    dest: resources_test/task_template/pancreas
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+  - path: /resources_test/spatially_variable_genes/mouse_brain_coronal_section1
+    dest: resources_test/spatially_variable_genes/mouse_brain_coronal_section1
+  - path: /common/library.bib
