@@ -1,10 +1,11 @@
 type: file
-example: "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/output.h5ad"
+example: resources_test/spatially_variable_genes/mouse_brain_coronal_section1/output.h5ad
+label: Output
+summary: Anndata with estimate spatial variability.
+description: Anndata with estimated spatial variability score for each gene.
 info:
-  label: Output
-  summary: "Anndata with estimate spatial variability."
-  description: "Anndata with estimated spatial variability score for each gene."
-  slots:
+  format:
+    type: h5ad
     var:
       - type: string
         name: feature_id

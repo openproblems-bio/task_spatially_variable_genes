@@ -1,9 +1,10 @@
 type: file
-example: "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/score.h5ad"
+example: resources_test/spatially_variable_genes/mouse_brain_coronal_section1/score.h5ad
+label: Score
+summary: Metric score file.
 info:
-  label: "Score"
-  summary: Metric score file.
-  slots:
+  format:
+    type: h5ad
     uns:
       - type: string
         name: dataset_id

@@ -1,9 +1,10 @@
 type: file
-example: "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
+example: resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad
+label: Dataset
+summary: The dataset without spatially variable genes.
 info:
-  label: "Dataset"
-  summary: The dataset without spatially variable genes.
-  slots:
+  format: 
+    type: h5ad
     layers:
       - type: integer
         name: counts
