@@ -1,0 +1,42 @@
+__merge__: ../../api/comp_method.yaml
+name: spagcn
+label: SpaGCN
+summary: Integrating gene expression, spatial location and histology to identify spatial domains and spatially variable genes by graph convolutional network.
+description: |
+  To elucidate spatial gene expression variation, we present SpaGCN, a graph convolutional 
+  network approach that integrates gene expression, spatial location and histology in SRT data analysis. 
+  Through graph convolution, SpaGCN aggregates gene expression of each spot from its neighboring spots, 
+  which enables the identification of spatial domains with coherent expression and histology. 
+  The subsequent domain guided differential expression (DE) analysis then detects genes with 
+  enriched expression patterns in the identified domains. Analyzing seven SRT datasets using 
+  SpaGCN, we show it can detect genes with much more enriched spatial expression patterns than competing methods. Furthermore, genes detected by SpaGCN are transferrable and can be utilized to study spatial variation of gene expression in other datasets. SpaGCN is computationally 
+  fast, platform independent, making it a desirable tool for diverse SRT studies.
+references: 
+  doi: 10.1038/s41592-021-01255-8
+info:
+  preferred_normalization: counts
+  documentation_url: https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial.ipynb
+  repository_url: https://github.com/jianhuupenn/SpaGCN
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: apt
+        packages:
+          - libhdf5-dev
+          - cmake
+      - type: docker
+        run: |
+          git clone https://github.com/jianhuupenn/SpaGCN.git /opt/SpaGCN
+      - type: python
+        packages:
+          - numpy<2.0
+          - /opt/SpaGCN/SpaGCN_package
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

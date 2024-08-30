@@ -1,0 +1,74 @@
+__merge__: ../../api/comp_method.yaml
+name: scgco
+label: scGCO
+summary: Identification of spatially variable genes with graph cuts.
+description: |
+  Single-cell gene expression data with positional information is critical to dissect 
+  mechanisms and architectures of multicellular organisms, but the potential is limited 
+  by the scalability of current data analysis strategies. Here, we present scGCO, 
+  a method based on fast optimization of hidden Markov Random Fields with graph cuts 
+  to identify spatially variable genes. Comparing to existing methods, scGCO delivers 
+  a superior performance with lower false positive rate and improved specificity, 
+  while demonstrates a more robust performance in the presence of noises. 
+  Critically, scGCO scales near linearly with inputs and demonstrates orders of 
+  magnitude better running time and memory requirement than existing methods, 
+  and could represent a valuable solution when spatial transcriptomics data grows 
+  into millions of data points and beyond..
+references: 
+  doi: 10.1038/s41467-022-33182-3
+info:
+  preferred_normalization: counts
+  documentation_url: 
+    https://github.com/WangPeng-Lab/scGCO/blob/master/code/Tutorial/scGCO_tutorial.ipynb
+  repository_url: https://github.com/WangPeng-Lab/scGCO
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0 #python:3.9.16
+    setup:
+      - type: apt
+        packages:
+          # - git
+          # - procps
+          - libhdf5-dev
+          - cmake
+          - gdal-bin
+          - libgdal-dev
+      - type: docker
+        run : |
+          pip install Cython numpy==1.23.5 scipy
+        # pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1
+      - type: docker
+        run: |
+          git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple
+      - type: python
+        packages:
+          - h5py==3.8.0
+          - pandas==1.5.3
+          - parmap==1.6.0
+          # - scanpy==1.9.3
+          - tqdm==4.65.0
+          # - anndata==0.8.0
+          - matplotlib==3.7.1
+          - scikit-learn==1.2.2
+          - hdbscan
+          - seaborn==0.12.2
+          - pysal==2.0.0
+          - pygco==0.0.16
+          - shapely==2.0.1
+          - networkx==2.5
+          - scikit-image
+          # - pyyaml
+          # - requests
+      # - type: docker
+      #   run: |
+      #     git clone https://github.com/openproblems-bio/openproblems.git /opt/openproblems && \
+      #       pip install --no-cache-dir -r /opt/openproblems/docker/openproblems/requirements.txt && \
+      #       pip install --no-cache-dir --editable /opt/openproblems
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
