@@ -1,5 +1,5 @@
 workflow auto {
-  findStatesTemp(params, meta.config)
+  findStates(params, meta.config)
     | meta.workflow.run(
       auto: [publish: "state"]
     )
@@ -13,14 +13,29 @@ workflow run_wf {
 
   // construct list of methods
   methods = [
-    true_labels,
-    logistic_regression
+    random_ranking,
+    true_ranking, 
+    boostgp, 
+    gpcounts,
+    moran_i,
+    nnsvg,
+    scgco,
+    sepal,
+    somde,
+    spagcn,
+    spagft,
+    spanve,
+    spark,
+    spark_x,
+    spatialde,
+    spatialde2
   ]
 
   // construct list of metrics
   metrics = [
-    accuracy
+    correlation
   ]
+
 
   /****************************
    * EXTRACT DATASET METADATA *
@@ -30,7 +45,7 @@ workflow run_wf {
     | map{ id, state -> 
       [id, state + ["_meta": [join_id: id]]]
     }
-
+    
     // extract the dataset metadata
     | extract_metadata.run(
       fromState: [input: "input_solution"],
@@ -45,36 +60,30 @@ workflow run_wf {
    * RUN METHODS AND METRICS *
    ***************************/
   score_ch = dataset_ch
-
+  
     // run all methods
     | runEach(
       components: methods,
 
-      // use the 'filter' argument to only run a method on the normalisation the component is asking for
-      filter: { id, state, comp ->
-        def norm = state.dataset_uns.normalization_id
-        def pref = comp.config.info.preferred_normalization
-        // if the preferred normalisation is none at all,
-        // we can pass whichever dataset we want
-        def norm_check = (norm == "log_cp10k" && pref == "counts") || norm == pref
-        def method_check = !state.method_ids || state.method_ids.contains(comp.config.name)
-
-        method_check && norm_check
-      },
-
       // define a new 'id' by appending the method name to the dataset id
       id: { id, state, comp ->
-        id + "." + comp.config.name
+        id + "." + comp.config.functionality.name
       },
 
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: { id, state, comp ->
         def new_args = [
-          input_train: state.input_train,
-          input_test: state.input_test
+          input_data: state.input_dataset
         ]
-        if (comp.config.info.type == "control_method") {
+        if (comp.config.functionality.info.type == "control_method") {
           new_args.input_solution = state.input_solution
+        }
+        if (comp.config.functionality.name == "sepal") {
+          new_args.coord_type_sepal = state.coord_type_sepal
+          new_args.max_neighs_sepal = state.max_neighs_sepal
+        }
+        if (comp.config.functionality.name == "moran_i") {
+          new_args.coord_type_moran_i = state.coord_type_moran_i
         }
         new_args
       },
@@ -82,32 +91,33 @@ workflow run_wf {
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
         state + [
-          method_id: comp.config.name,
+          method_id: comp.config.functionality.name,
           method_output: output.output
         ]
       }
     )
-
+    
     // run all metrics
     | runEach(
       components: metrics,
       id: { id, state, comp ->
-        id + "." + comp.config.name
+        id + "." + comp.config.functionality.name
       },
       // use 'fromState' to fetch the arguments the component requires from the overall state
-      fromState: [
-        input_solution: "input_solution", 
-        input_prediction: "method_output"
-      ],
+      fromState: { id, state, comp ->
+        [
+          input_solution: state.input_solution,
+          input_method: state.method_output
+        ]
+      },
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
         state + [
-          metric_id: comp.config.name,
+          metric_id: comp.config.functionality.name,
           metric_output: output.output
         ]
       }
     )
-
 
   /******************************
    * GENERATE OUTPUT YAML FILES *
@@ -116,10 +126,6 @@ workflow run_wf {
 
   // extract the dataset metadata
   dataset_meta_ch = dataset_ch
-    // only keep one of the normalization methods
-    | filter{ id, state ->
-      state.dataset_uns.normalization_id == "log_cp10k"
-    }
     | joinStates { ids, states ->
       // store the dataset metadata in a file
       def dataset_uns = states.collect{state ->
@@ -160,10 +166,7 @@ workflow run_wf {
       def metric_configs_file = tempFile("metric_configs.yaml")
       metric_configs_file.write(metric_configs_yaml_blob)
 
-      def viash_file = meta.resources_dir.resolve("_viash.yaml")
-      def viash_file_content = toYamlBlob(readYaml(viash_file).info)
-      def task_info_file = tempFile("task_info.yaml")
-      task_info_file.write(viash_file_content)
+      def task_info_file = meta.resources_dir.resolve("task_info.yaml")
 
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}
@@ -193,119 +196,120 @@ workflow run_wf {
   output_ch
 }
 
+
 // temp fix for rename_keys typo
 
-def findStatesTemp(Map params, Map config) {
-  def auto_config = deepClone(config)
-  def auto_params = deepClone(params)
+// def findStatesTemp(Map params, Map config) {
+//   def auto_config = deepClone(config)
+//   def auto_params = deepClone(params)
 
-  auto_config = auto_config.clone()
-  // override arguments
-  auto_config.argument_groups = []
-  auto_config.arguments = [
-    [
-      type: "string",
-      name: "--id",
-      description: "A dummy identifier",
-      required: false
-    ],
-    [
-      type: "file",
-      name: "--input_states",
-      example: "/path/to/input/directory/**/state.yaml",
-      description: "Path to input directory containing the datasets to be integrated.",
-      required: true,
-      multiple: true,
-      multiple_sep: ";"
-    ],
-    [
-      type: "string",
-      name: "--filter",
-      example: "foo/.*/state.yaml",
-      description: "Regex to filter state files by path.",
-      required: false
-    ],
-    // to do: make this a yaml blob?
-    [
-      type: "string",
-      name: "--rename_keys",
-      example: ["newKey1:oldKey1", "newKey2:oldKey2"],
-      description: "Rename keys in the detected input files. This is useful if the input files do not match the set of input arguments of the workflow.",
-      required: false,
-      multiple: true,
-      multiple_sep: ";"
-    ],
-    [
-      type: "string",
-      name: "--settings",
-      example: '{"output_dataset": "dataset.h5ad", "k": 10}',
-      description: "Global arguments as a JSON glob to be passed to all components.",
-      required: false
-    ]
-  ]
-  if (!(auto_params.containsKey("id"))) {
-    auto_params["id"] = "auto"
-  }
+//   auto_config = auto_config.clone()
+//   // override arguments
+//   auto_config.argument_groups = []
+//   auto_config.arguments = [
+//     [
+//       type: "string",
+//       name: "--id",
+//       description: "A dummy identifier",
+//       required: false
+//     ],
+//     [
+//       type: "file",
+//       name: "--input_states",
+//       example: "/path/to/input/directory/**/state.yaml",
+//       description: "Path to input directory containing the datasets to be integrated.",
+//       required: true,
+//       multiple: true,
+//       multiple_sep: ";"
+//     ],
+//     [
+//       type: "string",
+//       name: "--filter",
+//       example: "foo/.*/state.yaml",
+//       description: "Regex to filter state files by path.",
+//       required: false
+//     ],
+//     // to do: make this a yaml blob?
+//     [
+//       type: "string",
+//       name: "--rename_keys",
+//       example: ["newKey1:oldKey1", "newKey2:oldKey2"],
+//       description: "Rename keys in the detected input files. This is useful if the input files do not match the set of input arguments of the workflow.",
+//       required: false,
+//       multiple: true,
+//       multiple_sep: ";"
+//     ],
+//     [
+//       type: "string",
+//       name: "--settings",
+//       example: '{"output_dataset": "dataset.h5ad", "k": 10}',
+//       description: "Global arguments as a JSON glob to be passed to all components.",
+//       required: false
+//     ]
+//   ]
+//   if (!(auto_params.containsKey("id"))) {
+//     auto_params["id"] = "auto"
+//   }
 
-  // run auto config through processConfig once more
-  auto_config = processConfig(auto_config)
+//   // run auto config through processConfig once more
+//   auto_config = processConfig(auto_config)
 
-  workflow findStatesTempWf {
-    helpMessage(auto_config)
+//   workflow findStatesTempWf {
+//     helpMessage(auto_config)
 
-    output_ch = 
-      channelFromParams(auto_params, auto_config)
-        | flatMap { autoId, args ->
+//     output_ch = 
+//       channelFromParams(auto_params, auto_config)
+//         | flatMap { autoId, args ->
 
-          def globalSettings = args.settings ? readYamlBlob(args.settings) : [:]
+//           def globalSettings = args.settings ? readYamlBlob(args.settings) : [:]
 
-          // look for state files in input dir
-          def stateFiles = args.input_states
+//           // look for state files in input dir
+//           def stateFiles = args.input_states
 
-          // filter state files by regex
-          if (args.filter) {
-            stateFiles = stateFiles.findAll{ stateFile ->
-              def stateFileStr = stateFile.toString()
-              def matcher = stateFileStr =~ args.filter
-              matcher.matches()}
-          }
+//           // filter state files by regex
+//           if (args.filter) {
+//             stateFiles = stateFiles.findAll{ stateFile ->
+//               def stateFileStr = stateFile.toString()
+//               def matcher = stateFileStr =~ args.filter
+//               matcher.matches()}
+//           }
 
-          // read in states
-          def states = stateFiles.collect { stateFile ->
-            def state_ = readTaggedYaml(stateFile)
-            [state_.id, state_]
-          }
+//           // read in states
+//           def states = stateFiles.collect { stateFile ->
+//             def state_ = readTaggedYaml(stateFile)
+//             [state_.id, state_]
+//           }
 
-          // construct renameMap
-          if (args.rename_keys) {
-            def renameMap = args.rename_keys.collectEntries{renameString ->
-              def split = renameString.split(":")
-              assert split.size() == 2: "Argument 'rename_keys' should be of the form 'newKey:oldKey;newKey:oldKey'"
-              split
-            }
+//           // construct renameMap
+//           if (args.rename_keys) {
+//             def renameMap = args.rename_keys.collectEntries{renameString ->
+//               def split = renameString.split(":")
+//               assert split.size() == 2: "Argument 'rename_keys' should be of the form 'newKey:oldKey;newKey:oldKey'"
+//               split
+//             }
 
-            // rename keys in state, only let states through which have all keys
-            // also add global settings
-            states = states.collectMany{id, state ->
-              def newState = [:]
+//             // rename keys in state, only let states through which have all keys
+//             // also add global settings
+//             states = states.collectMany{id, state ->
+//               def newState = [:]
 
-              for (key in renameMap.keySet()) {
-                def origKey = renameMap[key]
-                if (!(state.containsKey(origKey))) {
-                  return []
-                }
-                newState[key] = state[origKey]
-              }
+//               for (key in renameMap.keySet()) {
+//                 def origKey = renameMap[key]
+//                 if (!(state.containsKey(origKey))) {
+//                   return []
+//                 }
+//                 newState[key] = state[origKey]
+//               }
 
-              [[id, globalSettings + newState]]
-            }
-          }
+//               [[id, globalSettings + newState]]
+//             }
+//           }
 
-          states
-        }
-    emit:
-    output_ch
-  }
+//           states
+//         }
+//     emit:
+//     output_ch
+//   }
 
-  return findStatesTempWf
-}
+//   return findStatesTempWf
+// }

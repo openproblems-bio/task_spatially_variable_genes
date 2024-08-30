@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run this prior to executing this script:
-# bin/viash_build -q 'batch_integration'
+# viash ns build --setup cb 
 
 # get the root of the directory
 REPO_ROOT=$(git rev-parse --show-toplevel)
@@ -11,23 +11,23 @@ cd "$REPO_ROOT"
 
 set -e
 
-DATASETS_DIR="resources_test/common"
-OUTPUT_DIR="output/process_datasets_test"
+RAW_DATA=resources_test/common
+DATASET_DIR=resources_test/spatially_variable_genes
 
-if [ ! -d "$OUTPUT_DIR" ]; then
-  mkdir -p "$OUTPUT_DIR"
+if [ ! -d "$DATASET_DIR" ]; then
+  mkdir -p "$DATASET_DIR"
 fi
-
-export NXF_VER=24.04.3
-
 nextflow run . \
   -main-script target/nextflow/workflows/process_datasets/main.nf \
   -profile docker \
-  -entry auto \
   -c common/nextflow_helpers/labels_ci.config \
-  --id run_test \
-  --input_states "$DATASETS_DIR/**/state.yaml" \
-  --rename_keys 'input:output_dataset' \
-  --settings '{"output_train": "train.h5ad", "output_test": "test.h5ad"}' \
-  --publish_dir "$OUTPUT_DIR" \
-  --output_state "state.yaml"
+  --id mouse_brain_coronal_section1 \
+  --input $RAW_DATA/mouse_brain_coronal_section1/dataset.h5ad \
+  --output_dataset dataset.h5ad \
+  --output_solution solution.h5ad \
+  --dataset_simulated_normalized simulated_dataset.h5ad \
+  --publish_dir $DATASET_DIR/mouse_brain_coronal_section1 \
+  --output_state "state.yaml" \
+  --gp_k_sim 50 \
+  --select_top_variable_genes 50 \
+  --num_reference_genes 200
