@@ -1,0 +1,28 @@
+__merge__: ../../api/comp_method.yaml
+name: spark
+label: SPARK
+summary: Spatial PAttern Recognition via Kernels
+description: |
+  SPARK builds upon a generalized linear spatial model (GLSM) with a variety of spatial kernels to accommodate count data.
+  With a newly developed penalized quasi-likelihood (PQL) algorithm, SPARK is scalable to analyzing tens of 
+  thousands of genes across tens of thousands spatial locations.
+references: 
+  doi: 10.1038/s41592-019-0701-7
+info:
+  preferred_normalization: counts
+  documentation_url: https://xzhoulab.github.io/SPARK/02_SPARK_Example/
+  repository_url: https://github.com/xzhoulab/SPARK
+resources:
+  - type: r_script
+    path: script.R
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+    setup:
+      - type: r
+        github: xzhoulab/SPARK
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [veryhightime, highmem, midcpu]

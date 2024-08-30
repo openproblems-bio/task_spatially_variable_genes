@@ -2810,6 +2810,7 @@ meta = [
           "name" : "--input",
           "label" : "Common Dataset",
           "summary" : "A subset of the common dataset.",
+          "description" : "Input dataset",
           "info" : {
             "format" : {
               "type" : "h5ad",
@@ -2817,49 +2818,35 @@ meta = [
                 {
                   "type" : "integer",
                   "name" : "counts",
-                  "description" : "Raw counts",
+                  "description" : "Raw counts.",
                   "required" : true
                 },
                 {
                   "type" : "double",
-                  "name" : "normalized",
-                  "description" : "Normalized expression values",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "cell_type",
-                  "description" : "Cell type information",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
+                  "name" : "counts",
+                  "description" : "Normalized expression values.",
                   "required" : true
                 }
               ],
               "var" : [
                 {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
-                  "required" : true
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature, usually a ENSEMBL gene id.",
+                  "required" : false
                 },
                 {
-                  "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, usually a gene symbol.",
                   "required" : true
                 }
               ],
               "obsm" : [
                 {
                   "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
                   "required" : true
                 }
               ],
@@ -2874,7 +2861,7 @@ meta = [
                   "name" : "dataset_name",
                   "type" : "string",
                   "description" : "Nicely formatted name.",
-                  "required" : true
+                  "required" : false
                 },
                 {
                   "type" : "string",
@@ -2892,31 +2879,25 @@ meta = [
                   "name" : "dataset_summary",
                   "type" : "string",
                   "description" : "Short description of the dataset.",
-                  "required" : true
+                  "required" : false
                 },
                 {
                   "name" : "dataset_description",
                   "type" : "string",
                   "description" : "Long description of the dataset.",
-                  "required" : true
+                  "required" : false
                 },
                 {
                   "name" : "dataset_organism",
                   "type" : "string",
                   "description" : "The organism of the sample in the dataset.",
                   "required" : false
-                },
-                {
-                  "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
-                  "required" : true
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/common/pancreas/dataset.h5ad"
+            "resources_test/common/mouse_brain_coronal_section1/dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2932,9 +2913,9 @@ meta = [
       "arguments" : [
         {
           "type" : "file",
-          "name" : "--output_train",
-          "label" : "Training data",
-          "summary" : "The training data in h5ad format",
+          "name" : "--output_dataset",
+          "label" : "Dataset",
+          "summary" : "The dataset without spatially variable genes.",
           "info" : {
             "format" : {
               "type" : "h5ad",
@@ -2942,49 +2923,35 @@ meta = [
                 {
                   "type" : "integer",
                   "name" : "counts",
-                  "description" : "Raw counts",
+                  "description" : "Raw counts.",
                   "required" : true
                 },
                 {
                   "type" : "double",
                   "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "label",
-                  "description" : "Ground truth cell type labels",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
+                  "description" : "Normalised expression values",
                   "required" : true
                 }
               ],
               "var" : [
                 {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
-                  "required" : true
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature, in this case a ENSEMBL gene id suffixed with alpha value.",
+                  "required" : false
                 },
                 {
-                  "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, in this case a gene symbol suffixed with alpha value.",
+                  "required" : false
                 }
               ],
               "obsm" : [
                 {
                   "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
                   "required" : true
                 }
               ],
@@ -2996,94 +2963,16 @@ meta = [
                   "required" : true
                 },
                 {
+                  "name" : "dataset_name",
                   "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
-                  "required" : true
+                  "description" : "Nicely formatted name.",
+                  "required" : false
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_template/pancreas/train.h5ad"
-          ],
-          "must_exist" : true,
-          "create_parent" : true,
-          "required" : true,
-          "direction" : "output",
-          "multiple" : false,
-          "multiple_sep" : ";"
-        },
-        {
-          "type" : "file",
-          "name" : "--output_test",
-          "label" : "Test data",
-          "summary" : "The subset of molecules used for the test dataset",
-          "info" : {
-            "format" : {
-              "type" : "h5ad",
-              "layers" : [
-                {
-                  "type" : "integer",
-                  "name" : "counts",
-                  "description" : "Raw counts",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
-                  "required" : true
-                }
-              ],
-              "var" : [
-                {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
-                }
-              ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
-                  "required" : true
-                }
-              ],
-              "uns" : [
-                {
-                  "type" : "string",
-                  "name" : "dataset_id",
-                  "description" : "A unique identifier for the dataset",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
-                  "required" : true
-                }
-              ]
-            }
-          },
-          "example" : [
-            "resources_test/task_template/pancreas/test.h5ad"
+            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3096,57 +2985,34 @@ meta = [
           "type" : "file",
           "name" : "--output_solution",
           "label" : "Solution",
-          "summary" : "The solution for the test data",
+          "summary" : "Anndata with true spatial variability.",
+          "description" : "Anndata with true spatial variability score for each gene.",
           "info" : {
             "format" : {
               "type" : "h5ad",
-              "layers" : [
-                {
-                  "type" : "integer",
-                  "name" : "counts",
-                  "description" : "Raw counts",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "label",
-                  "description" : "Ground truth cell type labels",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
-                  "required" : true
-                }
-              ],
               "var" : [
                 {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature (e.g., ESEMBL gene id suffixed with alpha value).",
+                  "required" : false
+                },
+                {
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, in this case a gene symbol suffixed with alpha value.",
+                  "required" : true
+                },
+                {
+                  "type" : "string",
+                  "name" : "orig_feature_name",
+                  "description" : "Original human-readable name for the feature, usually a gene symbol.",
                   "required" : true
                 },
                 {
                   "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
-                }
-              ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
+                  "name" : "true_spatial_var_score",
+                  "description" : "True spatial variability score",
                   "required" : true
                 }
               ],
@@ -3167,7 +3033,7 @@ meta = [
                   "type" : "string",
                   "name" : "dataset_url",
                   "description" : "Link to the original source of the dataset.",
-                  "required" : false
+                  "required" : true
                 },
                 {
                   "name" : "dataset_reference",
@@ -3191,24 +3057,212 @@ meta = [
                   "name" : "dataset_organism",
                   "type" : "string",
                   "description" : "The organism of the sample in the dataset.",
-                  "required" : false
-                },
-                {
-                  "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
                   "required" : true
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_template/pancreas/solution.h5ad"
+            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/solution.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
           "required" : true,
           "direction" : "output",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "file",
+          "name" : "--dataset_simulated_normalized",
+          "label" : "Common Dataset",
+          "summary" : "A subset of the common dataset.",
+          "info" : {
+            "format" : {
+              "type" : "h5ad",
+              "layers" : [
+                {
+                  "type" : "integer",
+                  "name" : "counts",
+                  "description" : "Raw counts.",
+                  "required" : true
+                }
+              ],
+              "var" : [
+                {
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature, in this case a ENSEMBL gene id suffixed with alpha value.",
+                  "required" : false
+                },
+                {
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, in this case a gene symbol suffixed with alpha value.",
+                  "required" : true
+                },
+                {
+                  "type" : "string",
+                  "name" : "orig_feature_id",
+                  "description" : "Original unique identifier for the feature, usually a ENSEMBL gene id.",
+                  "required" : false
+                },
+                {
+                  "type" : "string",
+                  "name" : "orig_feature_name",
+                  "description" : "Original human-readable name for the feature, usually a gene symbol.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "true_spatial_var_score",
+                  "description" : "True spatial variability score",
+                  "required" : true
+                }
+              ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
+                  "required" : true
+                }
+              ],
+              "uns" : [
+                {
+                  "type" : "string",
+                  "name" : "dataset_id",
+                  "description" : "A unique identifier for the dataset",
+                  "required" : true
+                },
+                {
+                  "name" : "dataset_name",
+                  "type" : "string",
+                  "description" : "Nicely formatted name.",
+                  "required" : true
+                },
+                {
+                  "type" : "string",
+                  "name" : "dataset_url",
+                  "description" : "Link to the original source of the dataset.",
+                  "required" : true
+                },
+                {
+                  "name" : "dataset_reference",
+                  "type" : "string",
+                  "description" : "Bibtex reference of the paper in which the dataset was published.",
+                  "required" : false
+                },
+                {
+                  "name" : "dataset_summary",
+                  "type" : "string",
+                  "description" : "Short description of the dataset.",
+                  "required" : true
+                },
+                {
+                  "name" : "dataset_description",
+                  "type" : "string",
+                  "description" : "Long description of the dataset.",
+                  "required" : true
+                },
+                {
+                  "name" : "dataset_organism",
+                  "type" : "string",
+                  "description" : "The organism of the sample in the dataset.",
+                  "required" : true
+                }
+              ]
+            }
+          },
+          "example" : [
+            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad"
+          ],
+          "must_exist" : true,
+          "create_parent" : true,
+          "required" : false,
+          "direction" : "output",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        }
+      ]
+    },
+    {
+      "name" : "Simulation options",
+      "arguments" : [
+        {
+          "type" : "integer",
+          "name" : "--gp_k_sim",
+          "description" : "Dimension of basis used for the Gaussian process smoother.",
+          "info" : {
+            "test_value" : 50
+          },
+          "default" : [
+            500
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "integer",
+          "name" : "--select_top_variable_genes_sim",
+          "description" : "Number of top variable genes to use for subsetting.",
+          "default" : [
+            50
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        }
+      ]
+    },
+    {
+      "name" : "Reference genes",
+      "arguments" : [
+        {
+          "type" : "integer",
+          "name" : "--num_reference_genes",
+          "description" : "Number of top SVGs to select as reference.",
+          "default" : [
+            200
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--coord_type_proc",
+          "description" : "How to create spatial graph to select reference genes.",
+          "default" : [
+            "grid"
+          ],
+          "required" : false,
+          "choices" : [
+            "grid",
+            "generic"
+          ],
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        }
+      ]
+    },
+    {
+      "name" : "Normalization options",
+      "arguments" : [
+        {
+          "type" : "integer",
+          "name" : "--n_cp",
+          "description" : "Number of counts per cell. When set to -1, will use None.",
+          "default" : [
+            -1
+          ],
+          "required" : false,
+          "direction" : "input",
           "multiple" : false,
           "multiple_sep" : ";"
         }
@@ -3246,7 +3300,27 @@ meta = [
       }
     },
     {
-      "name" : "data_processors/process_dataset",
+      "name" : "process_dataset/select_reference",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "process_dataset/simulate_svg",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "datasets/normalization/log_cp",
+      "repository" : {
+        "type" : "github",
+        "repo" : "openproblems-bio/openproblems-v2",
+        "tag" : "main_build"
+      }
+    },
+    {
+      "name" : "process_dataset/split_dataset",
       "repository" : {
         "type" : "local"
       }
@@ -3262,7 +3336,7 @@ meta = [
   ],
   "license" : "MIT",
   "links" : {
-    "repository" : "https://github.com/openproblems-bio/task_template",
+    "repository" : "https://github.com/openproblems-bio/task_spatially_variable_genes",
     "docker_registry" : "ghcr.io"
   },
   "runners" : [
@@ -3290,7 +3364,10 @@ meta = [
           "midtime" : "time = 4.h",
           "hightime" : "time = 8.h",
           "veryhightime" : "time = 24.h"
-        }
+        },
+        "script" : [
+          "process.errorStrategy = 'ignore'"
+        ]
       },
       "debug" : false,
       "container" : "docker"
@@ -3308,22 +3385,22 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "d8e02acaee2441784152eaac37518edec5c939cb",
+    "git_commit" : "a2a2f7f4d4ace9466aabeef469f088b6050468a7",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
-    "name" : "task_template",
+    "name" : "task_spatially_variable_genes",
     "version" : "build_main",
-    "label" : "Template",
-    "summary" : "A one sentence summary of purpose and methodology. Used for creating an overview tables.",
-    "description" : "Provide a clear and concise description of your task, detailing the specific problem it aims\nto solve. Outline the input data types, the expected output, and any assumptions or constraints.\nBe sure to explain any terminology or concepts that are essential for understanding the task.\n\nExplain the motivation behind your proposed task. Describe the biological or computational \nproblem you aim to address and why it's important. Discuss the current state of research in\nthis area and any gaps or challenges that your task could help address. This section \nshould convince readers of the significance and relevance of your task.\n",
+    "label" : "Spatially Variable Genes",
+    "summary" : "Spatially variable genes (SVGs) are genes whose expression levels vary significantly across different spatial regions within a tissue or across cells in a spatially structured context.",
+    "description" : "Recent years have witnessed significant progress in spatially-resolved transcriptome profiling techniques that simultaneously characterize cellular gene expression and their physical position, generating spatial transcriptomic (ST) data. The application of these techniques has dramatically advanced our understanding of disease and developmental biology. One common task for all ST profiles, regardless of the employed protocols, is to identify genes that exhibit spatial patterns. These genes, defined as spatially variable genes (SVGs), contain additional information about the spatial structure of the tissues of interest, compared to highly variable genes (HVGs).\n\nIdentification of spatially variable genes is crucial to for studying spatial domains within tissue microenvironmnets, developmental gradients and cell signaling pathways. In this task we attempt to evaluate various methods for detecting SVGs using a number of realistic simulated datasets with diverse patterns derived from real-world spatial transcriptomics data using scDesign3. Synthetic data is generated by mixing a Gaussian Process (GP) model and a non-spatial model (obtained by shuffling mean parameters of the GP model to remove spatial correlation between spots) to generate gene expressions with various spatial variability. For more details, please refer to our [manuscript](https://www.biorxiv.org/content/10.1101/2023.12.02.569717v1) and [Github](https://github.com/pinellolab/SVG_Benchmarking).\n",
     "info" : {
-      "image" : "The name of the image file to use for the component on the website.",
+      "image" : "thumbnail.svg",
       "test_resources" : [
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/task_template/",
-          "dest" : "resources_test/task_template"
+          "path" : "s3://openproblems-data/resources_test/spatially_variable_genes/",
+          "dest" : "resources_test/spatially_variable_genes"
         },
         {
           "type" : "s3",
@@ -3344,40 +3421,102 @@ meta = [
     "source" : "src",
     "target" : "target",
     "config_mods" : [
-      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n"
+      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n.runners[.type == \\"nextflow\\"].config.script := \\"process.errorStrategy = 'ignore'\\"\n"
     ],
     "authors" : [
       {
-        "name" : "John Doe",
+        "name" : "Zhijian Li",
         "roles" : [
           "author",
           "maintainer"
         ],
         "info" : {
-          "github" : "johndoe",
-          "orcid" : "0000-0000-0000-0000",
-          "email" : "john@doe.me",
-          "twitter" : "johndoe",
-          "linkedin" : "johndoe"
+          "github" : "lzj1769",
+          "orcid" : "0000-0002-1523-1333"
+        }
+      },
+      {
+        "name" : "Zain M. Patel",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "doczmp"
+        }
+      },
+      {
+        "name" : "Dongyuan Song",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "SONGDONGYUAN1994"
+        }
+      },
+      {
+        "name" : "Guanao Yan",
+        "roles" : [
+          "author"
+        ]
+      },
+      {
+        "name" : "Jingyi Jessica Li",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "JSB-UCLA"
+        }
+      },
+      {
+        "name" : "Luca Pinello",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "pinellolab"
+        }
+      },
+      {
+        "name" : "Robrecht Cannoodt",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "rcannood",
+          "orcid" : "0000-0003-3641-729X"
+        }
+      },
+      {
+        "name" : "Sai Nirmayi Yasa",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "sainirmayi",
+          "orcid" : "0009-0003-6319-9803"
         }
       }
     ],
     "keywords" : [
       "single-cell",
       "openproblems",
-      "benchmark"
+      "benchmark",
+      "spatial",
+      "transcriptomics",
+      "spatial variablility"
     ],
     "license" : "MIT",
     "organization" : "openproblems-bio",
     "references" : {
       "doi" : [
-        "10.21203/rs.3.rs-4181617/v1"
+        "10.1101/2023.12.02.569717"
       ]
     },
     "links" : {
-      "repository" : "https://github.com/openproblems-bio/task_template",
+      "repository" : "https://github.com/openproblems-bio/task_spatially_variable_genes",
       "docker_registry" : "ghcr.io",
-      "issue_tracker" : "https://github.com/openproblems-bio/task_template/issues"
+      "issue_tracker" : "https://github.com/openproblems-bio/task_spatially_variable_genes/issues"
     }
   }
 }'''))
@@ -3387,14 +3526,17 @@ meta = [
 meta["root_dir"] = getRootDir()
 include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
 include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
-include { process_dataset } from "${meta.resources_dir}/../../../nextflow/data_processors/process_dataset/main.nf"
+include { select_reference } from "${meta.resources_dir}/../../../nextflow/process_dataset/select_reference/main.nf"
+include { simulate_svg } from "${meta.resources_dir}/../../../nextflow/process_dataset/simulate_svg/main.nf"
+include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/datasets/normalization/log_cp/main.nf"
+include { split_dataset } from "${meta.resources_dir}/../../../nextflow/process_dataset/split_dataset/main.nf"
 
 // inner workflow
 // user-provided Nextflow code
 include { findArgumentSchema } from "${meta.resources_dir}/helper.nf"
 
 workflow auto {
-  findStatesTemp(params, meta.config)
+  findStates(params, meta.config)
     | meta.workflow.run(
       auto: [publish: "state"]
     )
@@ -3431,17 +3573,48 @@ workflow run_wf {
       state.dataset != null
     }
 
-    | process_dataset.run(
-      fromState: [ input: "dataset" ],
+    | select_reference.run(
+      fromState: [
+        input: "dataset",
+        num_features: "num_reference_genes",
+        coord_type_proc: "coord_type_proc"
+      ],
+      toState: [dataset: "output"]
+    )
+
+    | simulate_svg.run(
+      fromState: [
+        input: "dataset",
+        gp_k: "gp_k_sim",
+        select_top_variable_genes: "select_top_variable_genes_sim"
+      ],
       toState: [
-        output_train: "output_train",
-        output_test: "output_test",
-        output_solution: "output_solution"
+        dataset_simulated: "output"
+      ]
+    )
+
+    | log_cp.run(
+      fromState: [
+        input: "dataset_simulated",
+      ],
+      toState: [
+        dataset_simulated_normalized: "output"
+      ],
+      args: [n_cp: -1]
+    )
+
+    | split_dataset.run(
+      fromState: [
+        input: "dataset_simulated_normalized"
+      ],
+      toState: [
+        output_dataset: "output_dataset",
+        output_solution: "output_solution" 
       ]
     )
 
     // only output the files for which an output file was specified
-    | setState(["output_train", "output_test", "output_solution"])
+    | setState(["output_dataset", "output_solution", "dataset_simulated_normalized"])
 
   emit:
   output_ch

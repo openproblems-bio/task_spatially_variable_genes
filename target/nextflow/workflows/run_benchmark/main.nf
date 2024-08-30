@@ -2807,9 +2807,9 @@ meta = [
       "arguments" : [
         {
           "type" : "file",
-          "name" : "--input_train",
-          "label" : "Training data",
-          "summary" : "The training data in h5ad format",
+          "name" : "--input_dataset",
+          "label" : "Dataset",
+          "summary" : "The dataset without spatially variable genes.",
           "info" : {
             "format" : {
               "type" : "h5ad",
@@ -2817,49 +2817,35 @@ meta = [
                 {
                   "type" : "integer",
                   "name" : "counts",
-                  "description" : "Raw counts",
+                  "description" : "Raw counts.",
                   "required" : true
                 },
                 {
                   "type" : "double",
                   "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "label",
-                  "description" : "Ground truth cell type labels",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
+                  "description" : "Normalised expression values",
                   "required" : true
                 }
               ],
               "var" : [
                 {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
-                  "required" : true
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature, in this case a ENSEMBL gene id suffixed with alpha value.",
+                  "required" : false
                 },
                 {
-                  "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, in this case a gene symbol suffixed with alpha value.",
+                  "required" : false
                 }
               ],
               "obsm" : [
                 {
                   "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
                   "required" : true
                 }
               ],
@@ -2871,94 +2857,16 @@ meta = [
                   "required" : true
                 },
                 {
+                  "name" : "dataset_name",
                   "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
-                  "required" : true
+                  "description" : "Nicely formatted name.",
+                  "required" : false
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_template/pancreas/train.h5ad"
-          ],
-          "must_exist" : true,
-          "create_parent" : true,
-          "required" : true,
-          "direction" : "input",
-          "multiple" : false,
-          "multiple_sep" : ";"
-        },
-        {
-          "type" : "file",
-          "name" : "--input_test",
-          "label" : "Test data",
-          "summary" : "The subset of molecules used for the test dataset",
-          "info" : {
-            "format" : {
-              "type" : "h5ad",
-              "layers" : [
-                {
-                  "type" : "integer",
-                  "name" : "counts",
-                  "description" : "Raw counts",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
-                  "required" : true
-                }
-              ],
-              "var" : [
-                {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
-                }
-              ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
-                  "required" : true
-                }
-              ],
-              "uns" : [
-                {
-                  "type" : "string",
-                  "name" : "dataset_id",
-                  "description" : "A unique identifier for the dataset",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
-                  "required" : true
-                }
-              ]
-            }
-          },
-          "example" : [
-            "resources_test/task_template/pancreas/test.h5ad"
+            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2971,57 +2879,34 @@ meta = [
           "type" : "file",
           "name" : "--input_solution",
           "label" : "Solution",
-          "summary" : "The solution for the test data",
+          "summary" : "Anndata with true spatial variability.",
+          "description" : "Anndata with true spatial variability score for each gene.",
           "info" : {
             "format" : {
               "type" : "h5ad",
-              "layers" : [
-                {
-                  "type" : "integer",
-                  "name" : "counts",
-                  "description" : "Raw counts",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "normalized",
-                  "description" : "Normalized counts",
-                  "required" : true
-                }
-              ],
-              "obs" : [
-                {
-                  "type" : "string",
-                  "name" : "label",
-                  "description" : "Ground truth cell type labels",
-                  "required" : true
-                },
-                {
-                  "type" : "string",
-                  "name" : "batch",
-                  "description" : "Batch information",
-                  "required" : true
-                }
-              ],
               "var" : [
                 {
-                  "type" : "boolean",
-                  "name" : "hvg",
-                  "description" : "Whether or not the feature is considered to be a 'highly variable gene'",
+                  "type" : "string",
+                  "name" : "feature_id",
+                  "description" : "Unique identifier for the feature (e.g., ESEMBL gene id suffixed with alpha value).",
+                  "required" : false
+                },
+                {
+                  "type" : "string",
+                  "name" : "feature_name",
+                  "description" : "A human-readable name for the feature, in this case a gene symbol suffixed with alpha value.",
+                  "required" : true
+                },
+                {
+                  "type" : "string",
+                  "name" : "orig_feature_name",
+                  "description" : "Original human-readable name for the feature, usually a gene symbol.",
                   "required" : true
                 },
                 {
                   "type" : "double",
-                  "name" : "hvg_score",
-                  "description" : "A ranking of the features by hvg.",
-                  "required" : true
-                }
-              ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "X_pca",
-                  "description" : "The resulting PCA embedding.",
+                  "name" : "true_spatial_var_score",
+                  "description" : "True spatial variability score",
                   "required" : true
                 }
               ],
@@ -3042,7 +2927,7 @@ meta = [
                   "type" : "string",
                   "name" : "dataset_url",
                   "description" : "Link to the original source of the dataset.",
-                  "required" : false
+                  "required" : true
                 },
                 {
                   "name" : "dataset_reference",
@@ -3066,23 +2951,61 @@ meta = [
                   "name" : "dataset_organism",
                   "type" : "string",
                   "description" : "The organism of the sample in the dataset.",
-                  "required" : false
-                },
-                {
-                  "type" : "string",
-                  "name" : "normalization_id",
-                  "description" : "Which normalization was used",
                   "required" : true
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_template/pancreas/solution.h5ad"
+            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/solution.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
           "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        }
+      ]
+    },
+    {
+      "name" : "Method specific arguments",
+      "arguments" : [
+        {
+          "type" : "string",
+          "name" : "--coord_type_moran_i",
+          "description" : "Type of coordinate system to use for Moran's I. Valid options are \\"grid\\" for grid coordinates or \\"generic\\" for generic coordinates.",
+          "required" : false,
+          "choices" : [
+            "grid",
+            "generic"
+          ],
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--coord_type_sepal",
+          "description" : "Type of coordinate system to use for Sepal. Valid options are \\"grid\\" for grid coordinates or \\"generic\\" for generic coordinates.",
+          "required" : false,
+          "choices" : [
+            "grid",
+            "generic"
+          ],
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "integer",
+          "name" : "--max_neighs_sepal",
+          "description" : "Maximum number of neighbors of a node in the spatial graph. Valid options are 4 (square-grid) and 6 (hexagonal-grid).",
+          "required" : false,
+          "choices" : [
+            4,
+            6
+          ],
           "direction" : "input",
           "multiple" : false,
           "multiple_sep" : ";"
@@ -3159,20 +3082,6 @@ meta = [
           "multiple_sep" : ";"
         }
       ]
-    },
-    {
-      "name" : "Methods",
-      "arguments" : [
-        {
-          "type" : "string",
-          "name" : "--method_ids",
-          "description" : "A list of method ids to run. If not specified, all methods will be run.",
-          "required" : false,
-          "direction" : "input",
-          "multiple" : true,
-          "multiple_sep" : ";"
-        }
-      ]
     }
   ],
   "resources" : [
@@ -3206,19 +3115,103 @@ meta = [
       }
     },
     {
-      "name" : "control_methods/true_labels",
+      "name" : "control_methods/random_ranking",
       "repository" : {
         "type" : "local"
       }
     },
     {
-      "name" : "methods/logistic_regression",
+      "name" : "control_methods/true_ranking",
       "repository" : {
         "type" : "local"
       }
     },
     {
-      "name" : "metrics/accuracy",
+      "name" : "methods/boostgp",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/gpcounts",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/moran_i",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/nnsvg",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/scgco",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/sepal",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/somde",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spagcn",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spagft",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spanve",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spark",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spark_x",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spatialde",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/spatialde2",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/correlation",
       "repository" : {
         "type" : "local"
       }
@@ -3234,7 +3227,7 @@ meta = [
   ],
   "license" : "MIT",
   "links" : {
-    "repository" : "https://github.com/openproblems-bio/task_template",
+    "repository" : "https://github.com/openproblems-bio/task_spatially_variable_genes",
     "docker_registry" : "ghcr.io"
   },
   "runners" : [
@@ -3262,7 +3255,10 @@ meta = [
           "midtime" : "time = 4.h",
           "hightime" : "time = 8.h",
           "veryhightime" : "time = 24.h"
-        }
+        },
+        "script" : [
+          "process.errorStrategy = 'ignore'"
+        ]
       },
       "debug" : false,
       "container" : "docker"
@@ -3280,22 +3276,22 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "d8e02acaee2441784152eaac37518edec5c939cb",
+    "git_commit" : "a2a2f7f4d4ace9466aabeef469f088b6050468a7",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
-    "name" : "task_template",
+    "name" : "task_spatially_variable_genes",
     "version" : "build_main",
-    "label" : "Template",
-    "summary" : "A one sentence summary of purpose and methodology. Used for creating an overview tables.",
-    "description" : "Provide a clear and concise description of your task, detailing the specific problem it aims\nto solve. Outline the input data types, the expected output, and any assumptions or constraints.\nBe sure to explain any terminology or concepts that are essential for understanding the task.\n\nExplain the motivation behind your proposed task. Describe the biological or computational \nproblem you aim to address and why it's important. Discuss the current state of research in\nthis area and any gaps or challenges that your task could help address. This section \nshould convince readers of the significance and relevance of your task.\n",
+    "label" : "Spatially Variable Genes",
+    "summary" : "Spatially variable genes (SVGs) are genes whose expression levels vary significantly across different spatial regions within a tissue or across cells in a spatially structured context.",
+    "description" : "Recent years have witnessed significant progress in spatially-resolved transcriptome profiling techniques that simultaneously characterize cellular gene expression and their physical position, generating spatial transcriptomic (ST) data. The application of these techniques has dramatically advanced our understanding of disease and developmental biology. One common task for all ST profiles, regardless of the employed protocols, is to identify genes that exhibit spatial patterns. These genes, defined as spatially variable genes (SVGs), contain additional information about the spatial structure of the tissues of interest, compared to highly variable genes (HVGs).\n\nIdentification of spatially variable genes is crucial to for studying spatial domains within tissue microenvironmnets, developmental gradients and cell signaling pathways. In this task we attempt to evaluate various methods for detecting SVGs using a number of realistic simulated datasets with diverse patterns derived from real-world spatial transcriptomics data using scDesign3. Synthetic data is generated by mixing a Gaussian Process (GP) model and a non-spatial model (obtained by shuffling mean parameters of the GP model to remove spatial correlation between spots) to generate gene expressions with various spatial variability. For more details, please refer to our [manuscript](https://www.biorxiv.org/content/10.1101/2023.12.02.569717v1) and [Github](https://github.com/pinellolab/SVG_Benchmarking).\n",
     "info" : {
-      "image" : "The name of the image file to use for the component on the website.",
+      "image" : "thumbnail.svg",
       "test_resources" : [
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/task_template/",
-          "dest" : "resources_test/task_template"
+          "path" : "s3://openproblems-data/resources_test/spatially_variable_genes/",
+          "dest" : "resources_test/spatially_variable_genes"
         },
         {
           "type" : "s3",
@@ -3316,40 +3312,102 @@ meta = [
     "source" : "src",
     "target" : "target",
     "config_mods" : [
-      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n"
+      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n.runners[.type == \\"nextflow\\"].config.script := \\"process.errorStrategy = 'ignore'\\"\n"
     ],
     "authors" : [
       {
-        "name" : "John Doe",
+        "name" : "Zhijian Li",
         "roles" : [
           "author",
           "maintainer"
         ],
         "info" : {
-          "github" : "johndoe",
-          "orcid" : "0000-0000-0000-0000",
-          "email" : "john@doe.me",
-          "twitter" : "johndoe",
-          "linkedin" : "johndoe"
+          "github" : "lzj1769",
+          "orcid" : "0000-0002-1523-1333"
+        }
+      },
+      {
+        "name" : "Zain M. Patel",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "doczmp"
+        }
+      },
+      {
+        "name" : "Dongyuan Song",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "SONGDONGYUAN1994"
+        }
+      },
+      {
+        "name" : "Guanao Yan",
+        "roles" : [
+          "author"
+        ]
+      },
+      {
+        "name" : "Jingyi Jessica Li",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "JSB-UCLA"
+        }
+      },
+      {
+        "name" : "Luca Pinello",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "pinellolab"
+        }
+      },
+      {
+        "name" : "Robrecht Cannoodt",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "rcannood",
+          "orcid" : "0000-0003-3641-729X"
+        }
+      },
+      {
+        "name" : "Sai Nirmayi Yasa",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "sainirmayi",
+          "orcid" : "0009-0003-6319-9803"
         }
       }
     ],
     "keywords" : [
       "single-cell",
       "openproblems",
-      "benchmark"
+      "benchmark",
+      "spatial",
+      "transcriptomics",
+      "spatial variablility"
     ],
     "license" : "MIT",
     "organization" : "openproblems-bio",
     "references" : {
       "doi" : [
-        "10.21203/rs.3.rs-4181617/v1"
+        "10.1101/2023.12.02.569717"
       ]
     },
     "links" : {
-      "repository" : "https://github.com/openproblems-bio/task_template",
+      "repository" : "https://github.com/openproblems-bio/task_spatially_variable_genes",
       "docker_registry" : "ghcr.io",
-      "issue_tracker" : "https://github.com/openproblems-bio/task_template/issues"
+      "issue_tracker" : "https://github.com/openproblems-bio/task_spatially_variable_genes/issues"
     }
   }
 }'''))
@@ -3359,14 +3417,28 @@ meta = [
 meta["root_dir"] = getRootDir()
 include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
 include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
-include { true_labels } from "${meta.resources_dir}/../../../nextflow/control_methods/true_labels/main.nf"
-include { logistic_regression } from "${meta.resources_dir}/../../../nextflow/methods/logistic_regression/main.nf"
-include { accuracy } from "${meta.resources_dir}/../../../nextflow/metrics/accuracy/main.nf"
+include { random_ranking } from "${meta.resources_dir}/../../../nextflow/control_methods/random_ranking/main.nf"
+include { true_ranking } from "${meta.resources_dir}/../../../nextflow/control_methods/true_ranking/main.nf"
+include { boostgp } from "${meta.resources_dir}/../../../nextflow/methods/boostgp/main.nf"
+include { gpcounts } from "${meta.resources_dir}/../../../nextflow/methods/gpcounts/main.nf"
+include { moran_i } from "${meta.resources_dir}/../../../nextflow/methods/moran_i/main.nf"
+include { nnsvg } from "${meta.resources_dir}/../../../nextflow/methods/nnsvg/main.nf"
+include { scgco } from "${meta.resources_dir}/../../../nextflow/methods/scgco/main.nf"
+include { sepal } from "${meta.resources_dir}/../../../nextflow/methods/sepal/main.nf"
+include { somde } from "${meta.resources_dir}/../../../nextflow/methods/somde/main.nf"
+include { spagcn } from "${meta.resources_dir}/../../../nextflow/methods/spagcn/main.nf"
+include { spagft } from "${meta.resources_dir}/../../../nextflow/methods/spagft/main.nf"
+include { spanve } from "${meta.resources_dir}/../../../nextflow/methods/spanve/main.nf"
+include { spark } from "${meta.resources_dir}/../../../nextflow/methods/spark/main.nf"
+include { spark_x } from "${meta.resources_dir}/../../../nextflow/methods/spark_x/main.nf"
+include { spatialde } from "${meta.resources_dir}/../../../nextflow/methods/spatialde/main.nf"
+include { spatialde2 } from "${meta.resources_dir}/../../../nextflow/methods/spatialde2/main.nf"
+include { correlation } from "${meta.resources_dir}/../../../nextflow/metrics/correlation/main.nf"
 
 // inner workflow
 // user-provided Nextflow code
 workflow auto {
-  findStatesTemp(params, meta.config)
+  findStates(params, meta.config)
     | meta.workflow.run(
       auto: [publish: "state"]
     )
@@ -3380,14 +3452,29 @@ workflow run_wf {
 
   // construct list of methods
   methods = [
-    true_labels,
-    logistic_regression
+    random_ranking,
+    true_ranking, 
+    boostgp, 
+    gpcounts,
+    moran_i,
+    nnsvg,
+    scgco,
+    sepal,
+    somde,
+    spagcn,
+    spagft,
+    spanve,
+    spark,
+    spark_x,
+    spatialde,
+    spatialde2
   ]
 
   // construct list of metrics
   metrics = [
-    accuracy
+    correlation
   ]
+
 
   /****************************
    * EXTRACT DATASET METADATA *
@@ -3397,7 +3484,7 @@ workflow run_wf {
     | map{ id, state -> 
       [id, state + ["_meta": [join_id: id]]]
     }
-
+    
     // extract the dataset metadata
     | extract_metadata.run(
       fromState: [input: "input_solution"],
@@ -3412,36 +3499,30 @@ workflow run_wf {
    * RUN METHODS AND METRICS *
    ***************************/
   score_ch = dataset_ch
-
+  
     // run all methods
     | runEach(
       components: methods,
 
-      // use the 'filter' argument to only run a method on the normalisation the component is asking for
-      filter: { id, state, comp ->
-        def norm = state.dataset_uns.normalization_id
-        def pref = comp.config.info.preferred_normalization
-        // if the preferred normalisation is none at all,
-        // we can pass whichever dataset we want
-        def norm_check = (norm == "log_cp10k" && pref == "counts") || norm == pref
-        def method_check = !state.method_ids || state.method_ids.contains(comp.config.name)
-
-        method_check && norm_check
-      },
-
       // define a new 'id' by appending the method name to the dataset id
       id: { id, state, comp ->
-        id + "." + comp.config.name
+        id + "." + comp.config.functionality.name
       },
 
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: { id, state, comp ->
         def new_args = [
-          input_train: state.input_train,
-          input_test: state.input_test
+          input_data: state.input_dataset
         ]
-        if (comp.config.info.type == "control_method") {
+        if (comp.config.functionality.info.type == "control_method") {
           new_args.input_solution = state.input_solution
+        }
+        if (comp.config.functionality.name == "sepal") {
+          new_args.coord_type_sepal = state.coord_type_sepal
+          new_args.max_neighs_sepal = state.max_neighs_sepal
+        }
+        if (comp.config.functionality.name == "moran_i") {
+          new_args.coord_type_moran_i = state.coord_type_moran_i
         }
         new_args
       },
@@ -3449,32 +3530,33 @@ workflow run_wf {
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
         state + [
-          method_id: comp.config.name,
+          method_id: comp.config.functionality.name,
           method_output: output.output
         ]
       }
     )
-
+    
     // run all metrics
     | runEach(
       components: metrics,
       id: { id, state, comp ->
-        id + "." + comp.config.name
+        id + "." + comp.config.functionality.name
       },
       // use 'fromState' to fetch the arguments the component requires from the overall state
-      fromState: [
-        input_solution: "input_solution", 
-        input_prediction: "method_output"
-      ],
+      fromState: { id, state, comp ->
+        [
+          input_solution: state.input_solution,
+          input_method: state.method_output
+        ]
+      },
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
         state + [
-          metric_id: comp.config.name,
+          metric_id: comp.config.functionality.name,
           metric_output: output.output
         ]
       }
     )
-
 
   /******************************
    * GENERATE OUTPUT YAML FILES *
@@ -3483,10 +3565,6 @@ workflow run_wf {
 
   // extract the dataset metadata
   dataset_meta_ch = dataset_ch
-    // only keep one of the normalization methods
-    | filter{ id, state ->
-      state.dataset_uns.normalization_id == "log_cp10k"
-    }
     | joinStates { ids, states ->
       // store the dataset metadata in a file
       def dataset_uns = states.collect{state ->
@@ -3527,10 +3605,7 @@ workflow run_wf {
       def metric_configs_file = tempFile("metric_configs.yaml")
       metric_configs_file.write(metric_configs_yaml_blob)
 
-      def viash_file = meta.resources_dir.resolve("_viash.yaml")
-      def viash_file_content = toYamlBlob(readYaml(viash_file).info)
-      def task_info_file = tempFile("task_info.yaml")
-      task_info_file.write(viash_file_content)
+      def task_info_file = meta.resources_dir.resolve("task_info.yaml")
 
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}
@@ -3560,122 +3635,123 @@ workflow run_wf {
   output_ch
 }
 
+
 // temp fix for rename_keys typo
 
-def findStatesTemp(Map params, Map config) {
-  def auto_config = deepClone(config)
-  def auto_params = deepClone(params)
+// def findStatesTemp(Map params, Map config) {
+//   def auto_config = deepClone(config)
+//   def auto_params = deepClone(params)
 
-  auto_config = auto_config.clone()
-  // override arguments
-  auto_config.argument_groups = []
-  auto_config.arguments = [
-    [
-      type: "string",
-      name: "--id",
-      description: "A dummy identifier",
-      required: false
-    ],
-    [
-      type: "file",
-      name: "--input_states",
-      example: "/path/to/input/directory/**/state.yaml",
-      description: "Path to input directory containing the datasets to be integrated.",
-      required: true,
-      multiple: true,
-      multiple_sep: ";"
-    ],
-    [
-      type: "string",
-      name: "--filter",
-      example: "foo/.*/state.yaml",
-      description: "Regex to filter state files by path.",
-      required: false
-    ],
-    // to do: make this a yaml blob?
-    [
-      type: "string",
-      name: "--rename_keys",
-      example: ["newKey1:oldKey1", "newKey2:oldKey2"],
-      description: "Rename keys in the detected input files. This is useful if the input files do not match the set of input arguments of the workflow.",
-      required: false,
-      multiple: true,
-      multiple_sep: ";"
-    ],
-    [
-      type: "string",
-      name: "--settings",
-      example: '{"output_dataset": "dataset.h5ad", "k": 10}',
-      description: "Global arguments as a JSON glob to be passed to all components.",
-      required: false
-    ]
-  ]
-  if (!(auto_params.containsKey("id"))) {
-    auto_params["id"] = "auto"
-  }
+//   auto_config = auto_config.clone()
+//   // override arguments
+//   auto_config.argument_groups = []
+//   auto_config.arguments = [
+//     [
+//       type: "string",
+//       name: "--id",
+//       description: "A dummy identifier",
+//       required: false
+//     ],
+//     [
+//       type: "file",
+//       name: "--input_states",
+//       example: "/path/to/input/directory/**/state.yaml",
+//       description: "Path to input directory containing the datasets to be integrated.",
+//       required: true,
+//       multiple: true,
+//       multiple_sep: ";"
+//     ],
+//     [
+//       type: "string",
+//       name: "--filter",
+//       example: "foo/.*/state.yaml",
+//       description: "Regex to filter state files by path.",
+//       required: false
+//     ],
+//     // to do: make this a yaml blob?
+//     [
+//       type: "string",
+//       name: "--rename_keys",
+//       example: ["newKey1:oldKey1", "newKey2:oldKey2"],
+//       description: "Rename keys in the detected input files. This is useful if the input files do not match the set of input arguments of the workflow.",
+//       required: false,
+//       multiple: true,
+//       multiple_sep: ";"
+//     ],
+//     [
+//       type: "string",
+//       name: "--settings",
+//       example: '{"output_dataset": "dataset.h5ad", "k": 10}',
+//       description: "Global arguments as a JSON glob to be passed to all components.",
+//       required: false
+//     ]
+//   ]
+//   if (!(auto_params.containsKey("id"))) {
+//     auto_params["id"] = "auto"
+//   }
 
-  // run auto config through processConfig once more
-  auto_config = processConfig(auto_config)
+//   // run auto config through processConfig once more
+//   auto_config = processConfig(auto_config)
 
-  workflow findStatesTempWf {
-    helpMessage(auto_config)
+//   workflow findStatesTempWf {
+//     helpMessage(auto_config)
 
-    output_ch = 
-      channelFromParams(auto_params, auto_config)
-        | flatMap { autoId, args ->
+//     output_ch = 
+//       channelFromParams(auto_params, auto_config)
+//         | flatMap { autoId, args ->
 
-          def globalSettings = args.settings ? readYamlBlob(args.settings) : [:]
+//           def globalSettings = args.settings ? readYamlBlob(args.settings) : [:]
 
-          // look for state files in input dir
-          def stateFiles = args.input_states
+//           // look for state files in input dir
+//           def stateFiles = args.input_states
 
-          // filter state files by regex
-          if (args.filter) {
-            stateFiles = stateFiles.findAll{ stateFile ->
-              def stateFileStr = stateFile.toString()
-              def matcher = stateFileStr =~ args.filter
-              matcher.matches()}
-          }
+//           // filter state files by regex
+//           if (args.filter) {
+//             stateFiles = stateFiles.findAll{ stateFile ->
+//               def stateFileStr = stateFile.toString()
+//               def matcher = stateFileStr =~ args.filter
+//               matcher.matches()}
+//           }
 
-          // read in states
-          def states = stateFiles.collect { stateFile ->
-            def state_ = readTaggedYaml(stateFile)
-            [state_.id, state_]
-          }
+//           // read in states
+//           def states = stateFiles.collect { stateFile ->
+//             def state_ = readTaggedYaml(stateFile)
+//             [state_.id, state_]
+//           }
 
-          // construct renameMap
-          if (args.rename_keys) {
-            def renameMap = args.rename_keys.collectEntries{renameString ->
-              def split = renameString.split(":")
-              assert split.size() == 2: "Argument 'rename_keys' should be of the form 'newKey:oldKey;newKey:oldKey'"
-              split
-            }
+//           // construct renameMap
+//           if (args.rename_keys) {
+//             def renameMap = args.rename_keys.collectEntries{renameString ->
+//               def split = renameString.split(":")
+//               assert split.size() == 2: "Argument 'rename_keys' should be of the form 'newKey:oldKey;newKey:oldKey'"
+//               split
+//             }
 
-            // rename keys in state, only let states through which have all keys
-            // also add global settings
-            states = states.collectMany{id, state ->
-              def newState = [:]
+//             // rename keys in state, only let states through which have all keys
+//             // also add global settings
+//             states = states.collectMany{id, state ->
+//               def newState = [:]
 
-              for (key in renameMap.keySet()) {
-                def origKey = renameMap[key]
-                if (!(state.containsKey(origKey))) {
-                  return []
-                }
-                newState[key] = state[origKey]
-              }
+//               for (key in renameMap.keySet()) {
+//                 def origKey = renameMap[key]
+//                 if (!(state.containsKey(origKey))) {
+//                   return []
+//                 }
+//                 newState[key] = state[origKey]
+//               }
 
-              [[id, globalSettings + newState]]
-            }
-          }
+//               [[id, globalSettings + newState]]
+//             }
+//           }
 
-          states
-        }
-    emit:
-    output_ch
-  }
+//           states
+//         }
+//     emit:
+//     output_ch
+//   }
 
-  return findStatesTempWf
-}
+//   return findStatesTempWf
+// }
 
 // inner workflow hook
 def innerWorkflowFactory(args) {

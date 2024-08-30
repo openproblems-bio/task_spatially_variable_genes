@@ -1,8 +1,7 @@
-#TODO: Change to the required and/or optional fields of the anndata
 type: file
-example: resources/score.h5ad
+example: resources_test/spatially_variable_genes/mouse_brain_coronal_section1/score.h5ad
 label: Score
-summary: "File indicating the score of a metric."
+summary: Metric score file.
 info:
   format:
     type: h5ad
@@ -10,10 +9,6 @@ info:
       - type: string
         name: dataset_id
         description: "A unique identifier for the dataset"
-        required: true
-      - type: string
-        name: normalization_id
-        description: "Which normalization was used"
         required: true
       - type: string
         name: method_id

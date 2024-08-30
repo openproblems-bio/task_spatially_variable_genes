@@ -1,7 +1,7 @@
 include { findArgumentSchema } from "${meta.resources_dir}/helper.nf"
 
 workflow auto {
-  findStatesTemp(params, meta.config)
+  findStates(params, meta.config)
     | meta.workflow.run(
       auto: [publish: "state"]
     )
@@ -38,17 +38,48 @@ workflow run_wf {
       state.dataset != null
     }
 
-    | process_dataset.run(
-      fromState: [ input: "dataset" ],
+    | select_reference.run(
+      fromState: [
+        input: "dataset",
+        num_features: "num_reference_genes",
+        coord_type_proc: "coord_type_proc"
+      ],
+      toState: [dataset: "output"]
+    )
+
+    | simulate_svg.run(
+      fromState: [
+        input: "dataset",
+        gp_k: "gp_k_sim",
+        select_top_variable_genes: "select_top_variable_genes_sim"
+      ],
       toState: [
-        output_train: "output_train",
-        output_test: "output_test",
-        output_solution: "output_solution"
+        dataset_simulated: "output"
+      ]
+    )
+
+    | log_cp.run(
+      fromState: [
+        input: "dataset_simulated",
+      ],
+      toState: [
+        dataset_simulated_normalized: "output"
+      ],
+      args: [n_cp: -1]
+    )
+
+    | split_dataset.run(
+      fromState: [
+        input: "dataset_simulated_normalized"
+      ],
+      toState: [
+        output_dataset: "output_dataset",
+        output_solution: "output_solution" 
       ]
     )
 
     // only output the files for which an output file was specified
-    | setState(["output_train", "output_test", "output_solution"])
+    | setState(["output_dataset", "output_solution", "dataset_simulated_normalized"])
 
   emit:
   output_ch
