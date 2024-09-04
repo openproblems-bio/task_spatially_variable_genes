@@ -10,8 +10,9 @@ references:
   doi: 10.1038/s41592-019-0701-7
 info:
   preferred_normalization: counts
-  documentation_url: https://xzhoulab.github.io/SPARK/02_SPARK_Example/
-  repository_url: https://github.com/xzhoulab/SPARK
+links:
+  documentation: https://xzhoulab.github.io/SPARK/02_SPARK_Example/
+  repository: https://github.com/xzhoulab/SPARK
 resources:
   - type: r_script
     path: script.R

@@ -13,8 +13,9 @@ references:
   doi: 10.1093/bioinformatics/btab471
 info:
   preferred_normalization: counts
-  documentation_url: https://github.com/WhirlFirst/somde/blob/master/slide_seq0819_11_SOM.ipynb
-  repository_url: https://github.com/XuegongLab/somde
+links:
+  documentation: https://github.com/WhirlFirst/somde/blob/master/slide_seq0819_11_SOM.ipynb
+  repository: https://github.com/XuegongLab/somde
 resources:
   - type: python_script
     path: script.py

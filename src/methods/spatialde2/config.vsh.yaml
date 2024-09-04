@@ -19,8 +19,9 @@ references:
   doi: 10.1101/2021.10.27.466045
 info:
   preferred_normalization: counts
-  documentation_url: https://pmbio.github.io/SpatialDE/
-  repository_url: https://github.com/PMBio/SpatialDE
+links:
+  documentation: https://pmbio.github.io/SpatialDE/
+  repository: https://github.com/PMBio/SpatialDE
 resources:
   - type: python_script
     path: script.py

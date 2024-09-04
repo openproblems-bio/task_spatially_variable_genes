@@ -18,9 +18,10 @@ references:
   doi: 10.1038/s41467-022-33182-3
 info:
   preferred_normalization: counts
-  documentation_url: 
+links:
+  documentation: 
     https://github.com/WangPeng-Lab/scGCO/blob/master/code/Tutorial/scGCO_tutorial.ipynb
-  repository_url: https://github.com/WangPeng-Lab/scGCO
+  repository: https://github.com/WangPeng-Lab/scGCO
 resources:
   - type: python_script
     path: script.py

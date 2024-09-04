@@ -21,8 +21,9 @@ references:
   doi: 10.1101/2022.12.10.519929
 info:
   preferred_normalization: counts
-  documentation_url: https://spagft.readthedocs.io/en/latest/
-  repository_url: https://github.com/jxLiu-bio/SpaGFT
+links:
+  documentation: https://spagft.readthedocs.io/en/latest/
+  repository: https://github.com/jxLiu-bio/SpaGFT
 resources:
   - type: python_script
     path: script.py
