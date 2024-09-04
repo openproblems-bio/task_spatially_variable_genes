@@ -77,3 +77,9 @@ repositories:
     type: github
     repo: openproblems-bio/openproblems-v2
     tag: main_build
+  - name: core
+    type: github
+    repo: openproblems-bio/core
+    # tag: build/main
+    tag: build/add_common_components
+    path: viash/core
