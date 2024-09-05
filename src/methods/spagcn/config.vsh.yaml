@@ -15,8 +15,9 @@ references:
   doi: 10.1038/s41592-021-01255-8
 info:
   preferred_normalization: counts
-  documentation_url: https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial.ipynb
-  repository_url: https://github.com/jianhuupenn/SpaGCN
+links:
+  documentation: https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial.ipynb
+  repository: https://github.com/jianhuupenn/SpaGCN
 resources:
   - type: python_script
     path: script.py

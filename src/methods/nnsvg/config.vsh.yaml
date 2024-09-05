@@ -11,9 +11,10 @@ references:
   doi: 10.1038/s41467-023-39748-z
 info:
   preferred_normalization: counts
-  documentation_url: 
+links:
+  documentation: 
     https://bioconductor.org/packages/release/bioc/vignettes/nnSVG/inst/doc/nnSVG.html
-  repository_url: https://github.com/lmweber/nnSVG
+  repository: https://github.com/lmweber/nnSVG
 resources:
   - type: r_script
     path: script.R

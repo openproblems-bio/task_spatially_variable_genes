@@ -8,8 +8,9 @@ references:
   doi: 10.1038/nmeth.4636
 info:
   preferred_normalization: counts
-  documentation_url: https://github.com/Teichlab/SpatialDE
-  repository_url: https://github.com/Teichlab/SpatialDE
+links:
+  documentation: https://github.com/Teichlab/SpatialDE
+  repository: https://github.com/Teichlab/SpatialDE
 resources:
   - type: python_script
     path: script.py

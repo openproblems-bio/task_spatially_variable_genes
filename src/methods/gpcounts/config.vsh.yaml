@@ -14,9 +14,10 @@ references:
   doi: 10.1093/bioinformatics/btab486
 info:
   preferred_normalization: counts
-  documentation_url: 
+links:
+  documentation: 
     https://github.com/ManchesterBioinference/GPcounts/blob/master/demo_notebooks/GPcounts_spatial.ipynb
-  repository_url: https://github.com/ManchesterBioinference/GPcounts
+  repository: https://github.com/ManchesterBioinference/GPcounts
 arguments:
   - name: --n_features
     type: integer

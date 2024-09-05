@@ -9,8 +9,9 @@ references:
   doi: 10.1038/s41592-021-01358-2
 info:
   preferred_normalization: counts
-  documentation_url: https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.spatial_autocorr.html
-  repository_url: https://github.com/scverse/squidpy
+links:
+  documentation: https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.spatial_autocorr.html
+  repository: https://github.com/scverse/squidpy
 arguments:
   - name: --coord_type_moran_i
     type: string

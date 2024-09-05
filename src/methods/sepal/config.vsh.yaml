@@ -7,10 +7,11 @@ description: |
   This method assesses the degree of randomness exhibited by each transcript profile and rank them accordingly.
 references: 
   doi: 10.1093/bioinformatics/btab164
+links:
+  documentation: https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.sepal.html
+  repository: https://github.com/scverse/squidpy
 info:
   preferred_normalization: counts
-  documentation_url: https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.sepal.html
-  repository_url: https://github.com/scverse/squidpy
 arguments:
   - name: --max_neighs_sepal
     type: integer
@@ -34,8 +35,7 @@ engines:
       - type: python
         packages:
           - pandas
-          - squidpy==1.4.1
-          - matplotlib==3.8.3
+          - squidpy
 runners:
   - type: executable
   - type: nextflow

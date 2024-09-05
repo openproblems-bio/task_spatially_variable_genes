@@ -17,8 +17,9 @@ references:
   doi: 10.1101/2023.02.08.527623
 info:
   preferred_normalization: counts
-  documentation_url: https://github.com/zjupgx/Spanve/blob/main/tutorial.ipynb
-  repository_url: https://github.com/zjupgx/Spanve
+links:
+  documentation: https://github.com/zjupgx/Spanve/blob/main/tutorial.ipynb
+  repository: https://github.com/zjupgx/Spanve
 resources:
   - type: python_script
     path: script.py

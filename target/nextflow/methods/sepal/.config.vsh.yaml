@@ -142,8 +142,6 @@ test_resources:
   path: "library.bib"
 info:
   preferred_normalization: "counts"
-  documentation_url: "https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.sepal.html"
-  repository_url: "https://github.com/scverse/squidpy"
   type: "method"
   type_info:
     label: "Method"
@@ -155,13 +153,19 @@ repositories:
   name: "openproblems-v2"
   repo: "openproblems-bio/openproblems-v2"
   tag: "main_build"
+- type: "github"
+  name: "core"
+  repo: "openproblems-bio/core"
+  tag: "build/add_common_components"
+  path: "viash/core"
 license: "MIT"
 references:
   doi:
   - "10.1093/bioinformatics/btab164"
 links:
-  repository: "https://github.com/openproblems-bio/task_spatially_variable_genes"
+  repository: "https://github.com/scverse/squidpy"
   docker_registry: "ghcr.io"
+  documentation: "https://squidpy.readthedocs.io/en/stable/api/squidpy.gr.sepal.html"
 runners:
 - type: "executable"
   id: "executable"
@@ -205,8 +209,7 @@ engines:
     user: false
     packages:
     - "pandas"
-    - "squidpy==1.4.1"
-    - "matplotlib==3.8.3"
+    - "squidpy"
     upgrade: true
   entrypoint: []
   cmd: null
@@ -216,8 +219,8 @@ build_info:
   engine: "docker"
   output: "target/nextflow/methods/sepal"
   executable: "target/nextflow/methods/sepal/main.nf"
-  viash_version: "0.9.0-RC7"
-  git_commit: "a2a2f7f4d4ace9466aabeef469f088b6050468a7"
+  viash_version: "0.9.0"
+  git_commit: "44c446453cb8255ae979da340973516b6cc7e60c"
   git_remote: "https://github.com/openproblems-bio/task_spatially_variable_genes"
 package_config:
   name: "task_spatially_variable_genes"
@@ -258,7 +261,12 @@ package_config:
     name: "openproblems-v2"
     repo: "openproblems-bio/openproblems-v2"
     tag: "main_build"
-  viash_version: "0.9.0-RC7"
+  - type: "github"
+    name: "core"
+    repo: "openproblems-bio/core"
+    tag: "build/add_common_components"
+    path: "viash/core"
+  viash_version: "0.9.0"
   source: "src"
   target: "target"
   config_mods:
