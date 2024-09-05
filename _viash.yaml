@@ -73,13 +73,8 @@ config_mods: |
   .runners[.type == "nextflow"].config.script := "process.errorStrategy = 'ignore'"
 
 repositories:
-  - name: openproblems-v2
-    type: github
-    repo: openproblems-bio/openproblems-v2
-    tag: main_build
   - name: core
     type: github
     repo: openproblems-bio/core
-    # tag: build/main
-    tag: build/add_common_components
+    tag: build/main
     path: viash/core

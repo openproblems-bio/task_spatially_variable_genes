@@ -47,7 +47,7 @@ workflow run_wf {
     }
     
     // extract the dataset metadata
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       fromState: [input: "input_solution"],
       toState: { id, output, state ->
         state + [
