@@ -9,7 +9,7 @@ par = {
     "output_solution": "solution.h5ad",
 }
 meta = {
-    "functionality_name": "process_dataset",
+    "name": "process_dataset",
     "resources_dir": "src/tasks/spatially_variable_genes/process_dataset",
     "config": "target/nextflow/spatially_variable_genes/process_dataset/split_dataset/.config.vsh.yaml"
 }

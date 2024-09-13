@@ -7,7 +7,7 @@ par = {
     'output': 'output.h5ad'
 }
 meta = {
-    'functionality_name': 'true_ranking'
+    'name': 'true_ranking'
 }
 # VIASH END
 
@@ -19,7 +19,7 @@ df.rename(columns={'true_spatial_var_score': 'pred_spatial_var_score'}, inplace=
 
 output = ad.AnnData(var=df,
                     uns={'dataset_id': input_solution.uns['dataset_id'],
-                         'method_id': meta['functionality_name']})
+                         'method_id': meta['name']})
 
 print("Write output to file", flush=True)
 output.write_h5ad(par['output'])

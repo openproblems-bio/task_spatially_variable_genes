@@ -10,7 +10,7 @@ par <- list(
     "n_iter" = 10
 )
 meta <- list(
-    "functionality_name" = "BOOST-GP"
+    "name" = "BOOST-GP"
 )
 # VIASH END
 
@@ -43,7 +43,7 @@ output <- anndata::AnnData(
     var = df,
     uns = list(
         "dataset_id" = adata$uns[["dataset_id"]],
-        "method_id" = meta[["functionality_name"]]
+        "method_id" = meta[["name"]]
     )
 )
 
