@@ -471,9 +471,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "pandas"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics correlation"
-LABEL org.opencontainers.image.created="2024-09-19T09:58:09Z"
+LABEL org.opencontainers.image.created="2024-09-19T12:18:24Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="af0c6a598058e543b2bfc4de49f7be887ae85a9d"
+LABEL org.opencontainers.image.revision="c9b2a75bcb691eb3666628aca5b556efc94ef45c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

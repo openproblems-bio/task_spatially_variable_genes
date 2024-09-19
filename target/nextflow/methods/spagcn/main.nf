@@ -3060,6 +3060,7 @@ meta = [
         {
           "type" : "apt",
           "packages" : [
+            "git",
             "libhdf5-dev",
             "cmake"
           ],
@@ -3076,6 +3077,8 @@ meta = [
           "user" : false,
           "packages" : [
             "numpy<2.0",
+            "anndata==0.8.0",
+            "scipy==1.13.1",
             "/opt/SpaGCN/SpaGCN_package"
           ],
           "upgrade" : true
@@ -3089,7 +3092,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/spagcn",
     "viash_version" : "0.9.0",
-    "git_commit" : "af0c6a598058e543b2bfc4de49f7be887ae85a9d",
+    "git_commit" : "c9b2a75bcb691eb3666628aca5b556efc94ef45c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

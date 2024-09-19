@@ -40,7 +40,7 @@ engines:
       - type: docker
         run : |
           pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1 && \
-          git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple && \
+          git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple
       - type: python
         github:
           - openproblems-bio/core#subdirectory=packages/python/openproblems

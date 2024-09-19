@@ -480,18 +480,18 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y libhdf5-dev cmake && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y git libhdf5-dev cmake && \
   rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/jianhuupenn/SpaGCN.git /opt/SpaGCN
 
 RUN pip install --upgrade pip && \
-  pip install --upgrade --no-cache-dir "numpy<2.0" "/opt/SpaGCN/SpaGCN_package"
+  pip install --upgrade --no-cache-dir "numpy<2.0" "anndata==0.8.0" "scipy==1.13.1" "/opt/SpaGCN/SpaGCN_package"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spagcn"
-LABEL org.opencontainers.image.created="2024-09-19T09:58:09Z"
+LABEL org.opencontainers.image.created="2024-09-19T12:18:25Z"
 LABEL org.opencontainers.image.source="https://github.com/jianhuupenn/SpaGCN"
-LABEL org.opencontainers.image.revision="af0c6a598058e543b2bfc4de49f7be887ae85a9d"
+LABEL org.opencontainers.image.revision="c9b2a75bcb691eb3666628aca5b556efc94ef45c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
