@@ -476,9 +476,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "/opt/SpatialDE/Python-module" "scanpy==1.9.8" "pandas==2.2.1" "numpy==1.26.4" "scipy==1.11.4"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spatialde"
-LABEL org.opencontainers.image.created="2024-09-19T09:39:18Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:57:27Z"
 LABEL org.opencontainers.image.source="https://github.com/Teichlab/SpatialDE"
-LABEL org.opencontainers.image.revision="b308a448ba21f7e34408a224619970bacf61ec4a"
+LABEL org.opencontainers.image.revision="1ad99b58115350e06df66d5a0d6ede7834095e02"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

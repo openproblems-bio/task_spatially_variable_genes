@@ -492,9 +492,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "/opt/RobustGP" "/opt/GPcounts"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods gpcounts"
-LABEL org.opencontainers.image.created="2024-09-19T09:39:19Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:57:27Z"
 LABEL org.opencontainers.image.source="https://github.com/ManchesterBioinference/GPcounts"
-LABEL org.opencontainers.image.revision="b308a448ba21f7e34408a224619970bacf61ec4a"
+LABEL org.opencontainers.image.revision="1ad99b58115350e06df66d5a0d6ede7834095e02"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

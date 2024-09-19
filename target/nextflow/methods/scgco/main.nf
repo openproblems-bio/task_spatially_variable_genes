@@ -3072,8 +3072,16 @@ meta = [
         {
           "type" : "docker",
           "run" : [
-            "pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1 && \\\\\ngit clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple && \\\\\ngit clone https://github.com/openproblems-bio/openproblems.git /opt/openproblems && \\\\\npip install --no-cache-dir -r /opt/openproblems/docker/openproblems/requirements.txt && \\\\\npip install --no-cache-dir --editable /opt/openproblems\n"
+            "pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1 && \\\\\ngit clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple && \\\\\n"
           ]
+        },
+        {
+          "type" : "python",
+          "user" : false,
+          "github" : [
+            "openproblems-bio/core#subdirectory=packages/python/openproblems"
+          ],
+          "upgrade" : true
         },
         {
           "type" : "python",
@@ -3108,7 +3116,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scgco",
     "viash_version" : "0.9.0",
-    "git_commit" : "b308a448ba21f7e34408a224619970bacf61ec4a",
+    "git_commit" : "1ad99b58115350e06df66d5a0d6ede7834095e02",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

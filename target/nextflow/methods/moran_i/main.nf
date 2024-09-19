@@ -3092,7 +3092,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/moran_i",
     "viash_version" : "0.9.0",
-    "git_commit" : "b308a448ba21f7e34408a224619970bacf61ec4a",
+    "git_commit" : "1ad99b58115350e06df66d5a0d6ede7834095e02",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

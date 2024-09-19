@@ -489,9 +489,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy<2.0" "/opt/SpaGCN/SpaGCN_package"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spagcn"
-LABEL org.opencontainers.image.created="2024-09-19T09:39:20Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:57:28Z"
 LABEL org.opencontainers.image.source="https://github.com/jianhuupenn/SpaGCN"
-LABEL org.opencontainers.image.revision="b308a448ba21f7e34408a224619970bacf61ec4a"
+LABEL org.opencontainers.image.revision="1ad99b58115350e06df66d5a0d6ede7834095e02"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
