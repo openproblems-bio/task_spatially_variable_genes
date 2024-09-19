@@ -26,16 +26,20 @@ engines:
     image: openproblems/base_python:1.0.0
     setup:
       - type: apt
-        packages:
+        packages: 
+          - git
+          # - procps
           - libhdf5-dev
           - cmake
       - type: docker
-        run: |
+        run : |
           git clone https://github.com/jianhuupenn/SpaGCN.git /opt/SpaGCN
       - type: python
-        packages:
-          - numpy<2.0
-          - /opt/SpaGCN/SpaGCN_package
+        packages: 
+        - numpy<2.0
+        - anndata==0.8.0
+        - scipy==1.13.1
+        - /opt/SpaGCN/SpaGCN_package
 runners:
   - type: executable
   - type: nextflow
