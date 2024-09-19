@@ -496,9 +496,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "patsy" "/opt/SpatialDE2"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spatialde2"
-LABEL org.opencontainers.image.created="2024-09-19T09:57:28Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:58:10Z"
 LABEL org.opencontainers.image.source="https://github.com/PMBio/SpatialDE"
-LABEL org.opencontainers.image.revision="1ad99b58115350e06df66d5a0d6ede7834095e02"
+LABEL org.opencontainers.image.revision="af0c6a598058e543b2bfc4de49f7be887ae85a9d"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

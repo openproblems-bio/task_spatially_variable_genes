@@ -3073,7 +3073,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/spark",
     "viash_version" : "0.9.0",
-    "git_commit" : "1ad99b58115350e06df66d5a0d6ede7834095e02",
+    "git_commit" : "af0c6a598058e543b2bfc4de49f7be887ae85a9d",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

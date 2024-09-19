@@ -491,9 +491,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "h5py==3.8.0" "pandas==1.5.3" "parmap==1.6.0" "scanpy==1.9.3" "tqdm==4.65.0" "anndata==0.8.0" "matplotlib==3.7.1" "scikit-learn==1.2.2" "hdbscan" "seaborn==0.12.2" "pysal==2.0.0" "pygco==0.0.16" "shapely==2.0.1" "networkx==2.5" "scikit-image" "pyyaml" "requests"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scgco"
-LABEL org.opencontainers.image.created="2024-09-19T09:57:28Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:58:09Z"
 LABEL org.opencontainers.image.source="https://github.com/WangPeng-Lab/scGCO"
-LABEL org.opencontainers.image.revision="1ad99b58115350e06df66d5a0d6ede7834095e02"
+LABEL org.opencontainers.image.revision="af0c6a598058e543b2bfc4de49f7be887ae85a9d"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
