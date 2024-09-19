@@ -61,11 +61,11 @@ resources:
 dependencies:
   - name: schema/verify_data_structure
     repository: core
-  - name: process_dataset/select_reference
-  - name: process_dataset/simulate_svg
+  - name: dataset_processors/select_reference
+  - name: dataset_processors/simulate_svg
   - name: datasets/normalization/log_cp
     repository: openproblems
-  - name: process_dataset/split_dataset
+  - name: dataset_processors/split_dataset
 
 runners:
   - type: nextflow

@@ -1,10 +1,10 @@
 name: select_reference
-namespace: process_dataset
+namespace: dataset_processors
 description: Compute SVG
 info:
   type: dataset_processor
   type_info:
-    label: select_reference
+    label: Select reference
     description: |
       Computes the spatially variable genes scores and select certain number of SVGs as reference.
 arguments:
