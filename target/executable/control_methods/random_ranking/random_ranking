@@ -473,9 +473,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "pandas"
 
 LABEL org.opencontainers.image.description="Companion container for running component control_methods random_ranking"
-LABEL org.opencontainers.image.created="2024-09-05T07:30:47Z"
+LABEL org.opencontainers.image.created="2024-09-19T09:39:19Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="44c446453cb8255ae979da340973516b6cc7e60c"
+LABEL org.opencontainers.image.revision="b308a448ba21f7e34408a224619970bacf61ec4a"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1073,7 +1073,7 @@ df['pred_spatial_var_score'] = np.random.rand(len(df['feature_id']))
 
 output = ad.AnnData(var=df,
                     uns={'dataset_id': input_data.uns['dataset_id'],
-                         'method_id': meta['functionality_name']})
+                         'method_id': meta['name']})
 
 print("Write output to file", flush=True)
 output.write_h5ad(par['output'])

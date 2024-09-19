@@ -3028,6 +3028,14 @@ meta = [
                   "required" : true
                 }
               ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
+                  "required" : true
+                }
+              ],
               "uns" : [
                 {
                   "type" : "string",
@@ -3122,16 +3130,16 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems-v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/main",
+      "path" : "viash/core"
     },
     {
       "type" : "github",
-      "name" : "core",
-      "repo" : "openproblems-bio/core",
-      "tag" : "build/add_common_components",
-      "path" : "viash/core"
+      "name" : "openproblems",
+      "repo" : "openproblems-bio/openproblems",
+      "tag" : "main_build"
     }
   ],
   "license" : "MIT",
@@ -3197,7 +3205,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_dataset/split_dataset",
     "viash_version" : "0.9.0",
-    "git_commit" : "44c446453cb8255ae979da340973516b6cc7e60c",
+    "git_commit" : "b308a448ba21f7e34408a224619970bacf61ec4a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3224,16 +3232,16 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems-v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/main",
+        "path" : "viash/core"
       },
       {
         "type" : "github",
-        "name" : "core",
-        "repo" : "openproblems-bio/core",
-        "tag" : "build/add_common_components",
-        "path" : "viash/core"
+        "name" : "openproblems",
+        "repo" : "openproblems-bio/openproblems",
+        "tag" : "main_build"
       }
     ],
     "viash_version" : "0.9.0",

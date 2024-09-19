@@ -27,6 +27,11 @@ info:
         name: true_spatial_var_score
         description: True spatial variability score
         required: true   
+    obsm:
+      - type: double
+        name: spatial
+        description: Spatial coordinates for each spot.
+        required: true
     uns:
       - type: string
         name: dataset_id

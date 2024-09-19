@@ -10,7 +10,7 @@ par = list(
     'output' = 'output.h5ad'
 )
 meta = list(
-    'functionality_name' = 'nnSVG',
+    'name' = 'nnSVG',
     'cpus' = 4
 )
 
@@ -66,6 +66,6 @@ output = anndata::AnnData(
     shape = adata$shape, 
     var=df,
     uns=list('dataset_id' = adata$uns[['dataset_id']],
-             'method_id' =  meta[['functionality_name']]))
+             'method_id' =  meta[['name']]))
 
 anndata::write_h5ad(anndata = output, filename = par$output)

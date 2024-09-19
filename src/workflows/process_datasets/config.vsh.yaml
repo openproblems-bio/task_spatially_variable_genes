@@ -59,14 +59,12 @@ resources:
   - path: /common/nextflow_helpers/helper.nf
 
 dependencies:
-  - name: common/check_dataset_schema
-    repository: openproblems-v2
-  - name: common/extract_metadata
-    repository: openproblems-v2
+  - name: schema/verify_data_structure
+    repository: core
   - name: process_dataset/select_reference
   - name: process_dataset/simulate_svg
   - name: datasets/normalization/log_cp
-    repository: openproblems-v2
+    repository: openproblems
   - name: process_dataset/split_dataset
 
 runners:

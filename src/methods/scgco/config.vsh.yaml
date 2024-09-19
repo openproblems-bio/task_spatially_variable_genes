@@ -27,31 +27,31 @@ resources:
     path: script.py
 engines:
   - type: docker
-    image: openproblems/base_python:1.0.0 #python:3.9.16
+    image: python:3.9.16
     setup:
       - type: apt
-        packages:
-          # - git
-          # - procps
+        packages: 
+          - git
+          - procps
           - libhdf5-dev
           - cmake
-          - gdal-bin
+          - gdal-bin 
           - libgdal-dev
       - type: docker
         run : |
-          pip install Cython numpy==1.23.5 scipy
-        # pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1
-      - type: docker
-        run: |
-          git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple
+          pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1 && \
+          git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple && \
+          git clone https://github.com/openproblems-bio/openproblems.git /opt/openproblems && \
+          pip install --no-cache-dir -r /opt/openproblems/docker/openproblems/requirements.txt && \
+          pip install --no-cache-dir --editable /opt/openproblems
       - type: python
         packages:
           - h5py==3.8.0
           - pandas==1.5.3
           - parmap==1.6.0
-          # - scanpy==1.9.3
+          - scanpy==1.9.3
           - tqdm==4.65.0
-          # - anndata==0.8.0
+          - anndata==0.8.0
           - matplotlib==3.7.1
           - scikit-learn==1.2.2
           - hdbscan
@@ -61,13 +61,8 @@ engines:
           - shapely==2.0.1
           - networkx==2.5
           - scikit-image
-          # - pyyaml
-          # - requests
-      # - type: docker
-      #   run: |
-      #     git clone https://github.com/openproblems-bio/openproblems.git /opt/openproblems && \
-      #       pip install --no-cache-dir -r /opt/openproblems/docker/openproblems/requirements.txt && \
-      #       pip install --no-cache-dir --editable /opt/openproblems
+          - pyyaml
+          - requests
 runners:
   - type: executable
   - type: nextflow

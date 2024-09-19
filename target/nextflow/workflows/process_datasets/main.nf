@@ -3022,6 +3022,14 @@ meta = [
                   "required" : true
                 }
               ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "spatial",
+                  "description" : "Spatial coordinates for each spot.",
+                  "required" : true
+                }
+              ],
               "uns" : [
                 {
                   "type" : "string",
@@ -3290,19 +3298,12 @@ meta = [
   "status" : "enabled",
   "dependencies" : [
     {
-      "name" : "common/check_dataset_schema",
+      "name" : "schema/verify_data_structure",
       "repository" : {
         "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      }
-    },
-    {
-      "name" : "common/extract_metadata",
-      "repository" : {
-        "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/main",
+        "path" : "viash/core"
       }
     },
     {
@@ -3321,7 +3322,7 @@ meta = [
       "name" : "datasets/normalization/log_cp",
       "repository" : {
         "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
+        "repo" : "openproblems-bio/openproblems",
         "tag" : "main_build"
       }
     },
@@ -3335,16 +3336,16 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems-v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/main",
+      "path" : "viash/core"
     },
     {
       "type" : "github",
-      "name" : "core",
-      "repo" : "openproblems-bio/core",
-      "tag" : "build/add_common_components",
-      "path" : "viash/core"
+      "name" : "openproblems",
+      "repo" : "openproblems-bio/openproblems",
+      "tag" : "main_build"
     }
   ],
   "license" : "MIT",
@@ -3398,7 +3399,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0",
-    "git_commit" : "44c446453cb8255ae979da340973516b6cc7e60c",
+    "git_commit" : "b308a448ba21f7e34408a224619970bacf61ec4a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3425,16 +3426,16 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems-v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/main",
+        "path" : "viash/core"
       },
       {
         "type" : "github",
-        "name" : "core",
-        "repo" : "openproblems-bio/core",
-        "tag" : "build/add_common_components",
-        "path" : "viash/core"
+        "name" : "openproblems",
+        "repo" : "openproblems-bio/openproblems",
+        "tag" : "main_build"
       }
     ],
     "viash_version" : "0.9.0",
@@ -3544,11 +3545,10 @@ meta = [
 
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
-include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
-include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
+include { verify_data_structure } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/main/nextflow/schema/verify_data_structure/main.nf"
 include { select_reference } from "${meta.resources_dir}/../../../nextflow/process_dataset/select_reference/main.nf"
 include { simulate_svg } from "${meta.resources_dir}/../../../nextflow/process_dataset/simulate_svg/main.nf"
-include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/datasets/normalization/log_cp/main.nf"
+include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/main_build/nextflow/datasets/normalization/log_cp/main.nf"
 include { split_dataset } from "${meta.resources_dir}/../../../nextflow/process_dataset/split_dataset/main.nf"
 
 // inner workflow
@@ -3569,7 +3569,7 @@ workflow run_wf {
   main:
   output_ch = input_ch
 
-    | check_dataset_schema.run(
+    | verify_data_structure.run(
       fromState: { id, state ->
         def schema = findArgumentSchema(meta.config, "input")
         def schemaYaml = tempFile("schema.yaml")

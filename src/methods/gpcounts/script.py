@@ -15,7 +15,7 @@ par = {
     'n_features': 120
 }
 meta = {
-    'functionality_name': 'GPcounts'
+    'name': 'GPcounts'
 }
 # VIASH END
 
@@ -86,7 +86,7 @@ df.columns = ['feature_id', 'pred_spatial_var_score']
 
 output = ad.AnnData(var=df,
                     uns={'dataset_id': adata.uns['dataset_id'],
-                         'method_id': meta['functionality_name']})
+                         'method_id': meta['name']})
 
 print("Write output to file", flush=True)
 output.write_h5ad(par['output'])

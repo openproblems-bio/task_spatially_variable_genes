@@ -66,10 +66,8 @@ resources:
     path: /_viash.yaml
 
 dependencies:
-  - name: common/check_dataset_schema
-    repository: openproblems-v2
-  - name: common/extract_metadata
-    repository: openproblems-v2
+  - name: h5ad/extract_uns_metadata
+    repository: core
   - name: control_methods/random_ranking
   - name: control_methods/true_ranking
   - name: methods/boostgp
@@ -87,6 +85,6 @@ dependencies:
   - name: methods/spatialde
   - name: methods/spatialde2
   - name: metrics/correlation
-
+    
 runners:
   - type: nextflow

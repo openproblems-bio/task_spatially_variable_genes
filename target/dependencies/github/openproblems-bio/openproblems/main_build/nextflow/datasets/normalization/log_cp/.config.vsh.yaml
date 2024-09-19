@@ -504,13 +504,13 @@ platforms:
 - type: "docker"
   id: "docker"
   image: "openproblems/base_python:1.0.0"
-  target_organization: "openproblems-bio"
+  target_organization: "openproblems-bio/openproblems"
   target_registry: "ghcr.io"
   namespace_separator: "/"
   resolve_volume: "Automatic"
   chown: true
   setup_strategy: "ifneedbepullelsecachedbuild"
-  target_image_source: "https://github.com/openproblems-bio/openproblems-v2"
+  target_image_source: "https://github.com/openproblems-bio/openproblems"
   entrypoint: []
   cmd: null
 - type: "nextflow"
@@ -543,10 +543,10 @@ platforms:
   debug: false
   container: "docker"
 info:
-  config: "/home/runner/work/openproblems-v2/openproblems-v2/src/datasets/normalization/log_cp/config.vsh.yaml"
+  config: "/home/runner/work/openproblems/openproblems/src/datasets/normalization/log_cp/config.vsh.yaml"
   platform: "nextflow"
-  output: "/home/runner/work/openproblems-v2/openproblems-v2/target/nextflow/datasets/normalization/log_cp"
-  executable: "/home/runner/work/openproblems-v2/openproblems-v2/target/nextflow/datasets/normalization/log_cp/log_cp"
-  viash_version: "0.8.0"
-  git_commit: "4b24f7be3c0337f4470b42ea208fe2575370dbfe"
-  git_remote: "https://github.com/openproblems-bio/openproblems-v2"
+  output: "/home/runner/work/openproblems/openproblems/target/nextflow/datasets/normalization/log_cp"
+  executable: "/home/runner/work/openproblems/openproblems/target/nextflow/datasets/normalization/log_cp/log_cp"
+  viash_version: "0.8.6"
+  git_commit: "37fde117354581948dc044dfd129755d1d1ab04b"
+  git_remote: "https://github.com/openproblems-bio/openproblems"

@@ -2983,16 +2983,16 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems-v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/main",
+      "path" : "viash/core"
     },
     {
       "type" : "github",
-      "name" : "core",
-      "repo" : "openproblems-bio/core",
-      "tag" : "build/add_common_components",
-      "path" : "viash/core"
+      "name" : "openproblems",
+      "repo" : "openproblems-bio/openproblems",
+      "tag" : "main_build"
     }
   ],
   "license" : "MIT",
@@ -3054,12 +3054,14 @@ meta = [
     {
       "type" : "docker",
       "id" : "docker",
-      "image" : "openproblems/base_python:1.0.0",
+      "image" : "python:3.9.16",
       "namespace_separator" : "/",
       "setup" : [
         {
           "type" : "apt",
           "packages" : [
+            "git",
+            "procps",
             "libhdf5-dev",
             "cmake",
             "gdal-bin",
@@ -3070,13 +3072,7 @@ meta = [
         {
           "type" : "docker",
           "run" : [
-            "pip install Cython numpy==1.23.5 scipy\n"
-          ]
-        },
-        {
-          "type" : "docker",
-          "run" : [
-            "git clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple\n"
+            "pip install Cython==0.29.33 numpy==1.23.5 scipy==1.9.1 && \\\\\ngit clone https://github.com/lzj1769/scGCO_simple.git /opt/scGCO/scGCO_simple && \\\\\ngit clone https://github.com/openproblems-bio/openproblems.git /opt/openproblems && \\\\\npip install --no-cache-dir -r /opt/openproblems/docker/openproblems/requirements.txt && \\\\\npip install --no-cache-dir --editable /opt/openproblems\n"
           ]
         },
         {
@@ -3086,7 +3082,9 @@ meta = [
             "h5py==3.8.0",
             "pandas==1.5.3",
             "parmap==1.6.0",
+            "scanpy==1.9.3",
             "tqdm==4.65.0",
+            "anndata==0.8.0",
             "matplotlib==3.7.1",
             "scikit-learn==1.2.2",
             "hdbscan",
@@ -3095,7 +3093,9 @@ meta = [
             "pygco==0.0.16",
             "shapely==2.0.1",
             "networkx==2.5",
-            "scikit-image"
+            "scikit-image",
+            "pyyaml",
+            "requests"
           ],
           "upgrade" : true
         }
@@ -3108,7 +3108,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scgco",
     "viash_version" : "0.9.0",
-    "git_commit" : "44c446453cb8255ae979da340973516b6cc7e60c",
+    "git_commit" : "b308a448ba21f7e34408a224619970bacf61ec4a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3135,16 +3135,16 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems-v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/main",
+        "path" : "viash/core"
       },
       {
         "type" : "github",
-        "name" : "core",
-        "repo" : "openproblems-bio/core",
-        "tag" : "build/add_common_components",
-        "path" : "viash/core"
+        "name" : "openproblems",
+        "repo" : "openproblems-bio/openproblems",
+        "tag" : "main_build"
       }
     ],
     "viash_version" : "0.9.0",
@@ -3342,7 +3342,7 @@ df['pred_spatial_var_score'] = -np.log10(df['pred_spatial_var_score'].tolist())
 
 output = ad.AnnData(var=df,
                     uns={'dataset_id': adata.uns['dataset_id'],
-                         'method_id': meta['functionality_name']})
+                         'method_id': meta['name']})
 
 print("Write output to file", flush=True)
 output.write_h5ad(par['output'])
