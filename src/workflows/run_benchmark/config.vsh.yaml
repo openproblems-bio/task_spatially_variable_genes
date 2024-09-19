@@ -85,6 +85,6 @@ dependencies:
   - name: methods/spatialde
   - name: methods/spatialde2
   - name: metrics/correlation
-
+    
 runners:
   - type: nextflow
