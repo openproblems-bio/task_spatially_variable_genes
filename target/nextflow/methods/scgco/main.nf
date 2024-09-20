@@ -3116,7 +3116,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scgco",
     "viash_version" : "0.9.0",
-    "git_commit" : "6d90f50c0c72ccb803821597250382bc75c8a996",
+    "git_commit" : "882e51b43b5db1ffb3701066f2fc5d2807de1795",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

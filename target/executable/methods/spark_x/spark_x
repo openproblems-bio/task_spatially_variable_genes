@@ -481,9 +481,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("xzhoulab/SPARK"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spark_x"
-LABEL org.opencontainers.image.created="2024-09-20T07:31:25Z"
+LABEL org.opencontainers.image.created="2024-09-20T07:43:31Z"
 LABEL org.opencontainers.image.source="https://github.com/xzhoulab/SPARK"
-LABEL org.opencontainers.image.revision="6d90f50c0c72ccb803821597250382bc75c8a996"
+LABEL org.opencontainers.image.revision="882e51b43b5db1ffb3701066f2fc5d2807de1795"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

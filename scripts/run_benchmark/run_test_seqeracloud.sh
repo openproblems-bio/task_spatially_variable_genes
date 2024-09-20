@@ -21,7 +21,7 @@ publish_dir: $publish_dir_s3
 settings: '{"coord_type_moran_i":"generic","coord_type_sepal":"grid","max_neighs_sepal":6}'
 HERE
 
-tw launch https://github.com/openproblems-bio/task_template.git \
+tw launch https://github.com/openproblems-bio/task_spatially_variable_genes.git \
   --revision build/main \
   --pull-latest \
   --main-script target/nextflow/workflows/run_benchmark/main.nf \
