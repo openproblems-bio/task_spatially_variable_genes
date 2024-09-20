@@ -1,8 +1,8 @@
 name: select_reference
-namespace: dataset_processors
+namespace: data_processors
 description: Compute SVG
 info:
-  type: dataset_processor
+  type: data_processor
   type_info:
     label: Select reference
     description: |
