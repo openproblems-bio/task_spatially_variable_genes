@@ -473,9 +473,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component dataset_processors simulate_svg"
-LABEL org.opencontainers.image.created="2024-09-20T07:43:32Z"
+LABEL org.opencontainers.image.created="2024-09-20T07:57:20Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="882e51b43b5db1ffb3701066f2fc5d2807de1795"
+LABEL org.opencontainers.image.revision="654a68353bdf90d1ac9d6f4e22ee2b3d337a3735"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
