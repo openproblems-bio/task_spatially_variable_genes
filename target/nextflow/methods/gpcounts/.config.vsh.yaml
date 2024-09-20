@@ -224,7 +224,7 @@ build_info:
   output: "target/nextflow/methods/gpcounts"
   executable: "target/nextflow/methods/gpcounts/main.nf"
   viash_version: "0.9.0"
-  git_commit: "c9b2a75bcb691eb3666628aca5b556efc94ef45c"
+  git_commit: "6d90f50c0c72ccb803821597250382bc75c8a996"
   git_remote: "https://github.com/openproblems-bio/task_spatially_variable_genes"
 package_config:
   name: "task_spatially_variable_genes"

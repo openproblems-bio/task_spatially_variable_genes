@@ -473,9 +473,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "pandas"
 
 LABEL org.opencontainers.image.description="Companion container for running component control_methods random_ranking"
-LABEL org.opencontainers.image.created="2024-09-19T12:18:24Z"
+LABEL org.opencontainers.image.created="2024-09-20T07:31:26Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="c9b2a75bcb691eb3666628aca5b556efc94ef45c"
+LABEL org.opencontainers.image.revision="6d90f50c0c72ccb803821597250382bc75c8a996"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
