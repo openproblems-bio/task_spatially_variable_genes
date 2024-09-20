@@ -4,14 +4,14 @@ import openproblems as op
 
 ## VIASH START
 par = {
-    "input": "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad",
+    "input": "resources_test/task_spatially_variable_genes/mouse_brain_coronal/simulated_dataset.h5ad",
     "output_dataset": "dataset.h5ad",
     "output_solution": "solution.h5ad",
 }
 meta = {
     "name": "process_dataset",
-    "resources_dir": "src/tasks/spatially_variable_genes/process_dataset",
-    "config": "target/nextflow/spatially_variable_genes/process_dataset/split_dataset/.config.vsh.yaml"
+    "resources_dir": "src/tasks/task_spatially_variable_genes/process_dataset",
+    "config": "target/nextflow/task_spatially_variable_genes/process_dataset/split_dataset/.config.vsh.yaml"
 }
 ## VIASH END
 

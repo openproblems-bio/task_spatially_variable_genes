@@ -34,8 +34,8 @@ resources:
   - type: python_script
     path: script.py
 test_resources:
-  - path: /resources_test/common/mouse_brain_coronal_section1
-    dest: resources_test/common/mouse_brain_coronal_section1
+  - path: /resources_test/common/mouse_brain_coronal
+    dest: resources_test/common/mouse_brain_coronal
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
 engines:

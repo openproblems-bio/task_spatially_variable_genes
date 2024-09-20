@@ -21,7 +21,7 @@ nextflow run . \
   -resume \
   -entry auto \
   -c common/nextflow_helpers/labels_ci.config \
-  --input_states resources_test/task_spatially_variable_genes/mouse_brain_coronal_section1_visium/state.yaml \
+  --input_states resources_test/task_spatially_variable_genes/mouse_brain_coronal/state.yaml \
   --rename_keys 'input_dataset:output_dataset;input_solution:output_solution' \
   --publish_dir "$publish_dir" \
   --output_state state.yaml \

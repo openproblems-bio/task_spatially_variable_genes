@@ -6,7 +6,7 @@ info:
     label: Split dataset
     summary: A spatially variable genes dataset processor.
     description: |
-      Split the common dataset for the spatially_variable_genes task.
+      Split the common dataset.
 arguments:
   - name: --input
     __merge__: ../../api/file_simulated_dataset.yaml
@@ -27,8 +27,8 @@ resources:
 test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-  - path: /resources_test/spatially_variable_genes/mouse_brain_coronal_section1
-    dest: resources_test/spatially_variable_genes/mouse_brain_coronal_section1
+  - path: /resources_test/task_spatially_variable_genes/mouse_brain_coronal
+    dest: resources_test/task_spatially_variable_genes/mouse_brain_coronal
 engines:
   - type: docker
     image: openproblems/base_python:1.0.0

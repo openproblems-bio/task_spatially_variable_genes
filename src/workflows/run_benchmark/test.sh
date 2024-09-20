@@ -8,7 +8,7 @@ cd "$REPO_ROOT"
 
 set -e
 
-DATASETS_DIR="resources_test/spatially_variable_genes"
+DATASETS_DIR="resources_test/task_spatially_variable_genes"
 OUTPUT_DIR="output/temp"
 
 if [ ! -d "$OUTPUT_DIR" ]; then

@@ -32,8 +32,8 @@ resources:
 test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-  - path: /resources_test/common/mouse_brain_coronal_section1
-    dest: resources_test/common/mouse_brain_coronal_section1
+  - path: /resources_test/common/mouse_brain_coronal
+    dest: resources_test/common/mouse_brain_coronal
 engines:
   - type: docker
     image: openproblems/base_r:1.0.0
