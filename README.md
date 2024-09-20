@@ -79,8 +79,7 @@ flowchart LR
 
 A subset of the common dataset.
 
-Example file:
-`resources_test/common/mouse_brain_coronal_section1/dataset.h5ad`
+Example file: `resources_test/common/mouse_brain_coronal/dataset.h5ad`
 
 Format:
 
@@ -120,7 +119,7 @@ Data structure:
 The dataset without spatially variable genes.
 
 Example file:
-`resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad`
+`resources_test/task_spatially_variable_genes/mouse_brain_coronal/dataset.h5ad`
 
 Format:
 
@@ -186,7 +185,7 @@ Arguments:
 Anndata with estimate spatial variability.
 
 Example file:
-`resources_test/spatially_variable_genes/mouse_brain_coronal_section1/output.h5ad`
+`resources_test/task_spatially_variable_genes/mouse_brain_coronal/output.h5ad`
 
 Description:
 
@@ -237,7 +236,7 @@ Arguments:
 Metric score file.
 
 Example file:
-`resources_test/spatially_variable_genes/mouse_brain_coronal_section1/score.h5ad`
+`resources_test/task_spatially_variable_genes/mouse_brain_coronal/score.h5ad`
 
 Format:
 
@@ -266,7 +265,7 @@ Data structure:
 A subset of the common dataset.
 
 Example file:
-`resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad`
+`resources_test/task_spatially_variable_genes/mouse_brain_coronal/simulated_dataset.h5ad`
 
 Format:
 
@@ -308,7 +307,7 @@ Data structure:
 Anndata with true spatial variability.
 
 Example file:
-`resources_test/spatially_variable_genes/mouse_brain_coronal_section1/solution.h5ad`
+`resources_test/task_spatially_variable_genes/mouse_brain_coronal/solution.h5ad`
 
 Description:
 
