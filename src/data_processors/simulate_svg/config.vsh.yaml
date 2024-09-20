@@ -1,7 +1,7 @@
 name: simulate_svg
-namespace: dataset_processors
+namespace: data_processors
 info:
-  type: dataset_processor
+  type: data_processor
   type_info:
     label: Simulate SVG
     summary: A spatially variable genes simulator.

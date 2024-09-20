@@ -3307,13 +3307,13 @@ meta = [
       }
     },
     {
-      "name" : "dataset_processors/select_reference",
+      "name" : "data_processors/select_reference",
       "repository" : {
         "type" : "local"
       }
     },
     {
-      "name" : "dataset_processors/simulate_svg",
+      "name" : "data_processors/simulate_svg",
       "repository" : {
         "type" : "local"
       }
@@ -3327,7 +3327,7 @@ meta = [
       }
     },
     {
-      "name" : "dataset_processors/split_dataset",
+      "name" : "data_processors/split_dataset",
       "repository" : {
         "type" : "local"
       }
@@ -3399,7 +3399,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0",
-    "git_commit" : "654a68353bdf90d1ac9d6f4e22ee2b3d337a3735",
+    "git_commit" : "7ea5c927968c70ffdf8933829fecec695029fbcd",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3546,10 +3546,10 @@ meta = [
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
 include { verify_data_structure } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/main/nextflow/schema/verify_data_structure/main.nf"
-include { select_reference } from "${meta.resources_dir}/../../../nextflow/dataset_processors/select_reference/main.nf"
-include { simulate_svg } from "${meta.resources_dir}/../../../nextflow/dataset_processors/simulate_svg/main.nf"
+include { select_reference } from "${meta.resources_dir}/../../../nextflow/data_processors/select_reference/main.nf"
+include { simulate_svg } from "${meta.resources_dir}/../../../nextflow/data_processors/simulate_svg/main.nf"
 include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/main_build/nextflow/datasets/normalization/log_cp/main.nf"
-include { split_dataset } from "${meta.resources_dir}/../../../nextflow/dataset_processors/split_dataset/main.nf"
+include { split_dataset } from "${meta.resources_dir}/../../../nextflow/data_processors/split_dataset/main.nf"
 
 // inner workflow
 // user-provided Nextflow code

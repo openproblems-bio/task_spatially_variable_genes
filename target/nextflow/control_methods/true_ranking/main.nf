@@ -3167,7 +3167,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/true_ranking",
     "viash_version" : "0.9.0",
-    "git_commit" : "654a68353bdf90d1ac9d6f4e22ee2b3d337a3735",
+    "git_commit" : "7ea5c927968c70ffdf8933829fecec695029fbcd",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

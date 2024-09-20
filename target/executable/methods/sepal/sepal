@@ -482,9 +482,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "pandas" "squidpy"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods sepal"
-LABEL org.opencontainers.image.created="2024-09-20T07:57:21Z"
+LABEL org.opencontainers.image.created="2024-09-20T08:40:31Z"
 LABEL org.opencontainers.image.source="https://github.com/scverse/squidpy"
-LABEL org.opencontainers.image.revision="654a68353bdf90d1ac9d6f4e22ee2b3d337a3735"
+LABEL org.opencontainers.image.revision="7ea5c927968c70ffdf8933829fecec695029fbcd"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

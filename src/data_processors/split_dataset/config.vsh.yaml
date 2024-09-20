@@ -1,7 +1,7 @@
 name: split_dataset
-namespace: dataset_processors
+namespace: data_processors
 info:
-  type: dataset_processor
+  type: data_processor
   type_info:
     label: Split dataset
     summary: A spatially variable genes dataset processor.

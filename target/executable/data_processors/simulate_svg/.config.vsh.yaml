@@ -1,5 +1,5 @@
 name: "simulate_svg"
-namespace: "dataset_processors"
+namespace: "data_processors"
 version: "build_main"
 argument_groups:
 - name: "Arguments"
@@ -184,7 +184,7 @@ test_resources:
   path: "resources_test/common/mouse_brain_coronal_section1"
   dest: "resources_test/common/mouse_brain_coronal_section1"
 info:
-  type: "dataset_processor"
+  type: "data_processor"
   type_info:
     label: "Simulate SVG"
     summary: "A spatially variable genes simulator."
@@ -253,10 +253,10 @@ build_info:
   config: "src/data_processors/simulate_svg/config.vsh.yaml"
   runner: "executable"
   engine: "docker"
-  output: "target/executable/dataset_processors/simulate_svg"
-  executable: "target/executable/dataset_processors/simulate_svg/simulate_svg"
+  output: "target/executable/data_processors/simulate_svg"
+  executable: "target/executable/data_processors/simulate_svg/simulate_svg"
   viash_version: "0.9.0"
-  git_commit: "654a68353bdf90d1ac9d6f4e22ee2b3d337a3735"
+  git_commit: "7ea5c927968c70ffdf8933829fecec695029fbcd"
   git_remote: "https://github.com/openproblems-bio/task_spatially_variable_genes"
 package_config:
   name: "task_spatially_variable_genes"
