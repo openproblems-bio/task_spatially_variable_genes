@@ -177,17 +177,17 @@ function ViashHelp {
   echo "    --input"
   echo "        type: file, required parameter, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/simulated_dataset.h5ad"
   echo ""
   echo "    --output_dataset"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/dataset.h5ad"
   echo ""
   echo "    --output_solution"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/solution.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/solution.h5ad"
   echo "        Anndata with true spatial variability score for each gene."
 }
 
@@ -467,9 +467,9 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component data_processors split_dataset"
-LABEL org.opencontainers.image.created="2024-09-20T08:40:30Z"
+LABEL org.opencontainers.image.created="2024-09-20T11:39:26Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="7ea5c927968c70ffdf8933829fecec695029fbcd"
+LABEL org.opencontainers.image.revision="af0d04c989ecfbab29621eadf9bf2b553535ae63"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -2914,7 +2914,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad"
+            "resources_test/task_spatially_variable_genes/mouse_brain_coronal/simulated_dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2984,7 +2984,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
+            "resources_test/task_spatially_variable_genes/mouse_brain_coronal/dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3083,7 +3083,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/solution.h5ad"
+            "resources_test/task_spatially_variable_genes/mouse_brain_coronal/solution.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3114,8 +3114,8 @@ meta = [
     },
     {
       "type" : "file",
-      "path" : "/resources_test/spatially_variable_genes/mouse_brain_coronal_section1",
-      "dest" : "resources_test/spatially_variable_genes/mouse_brain_coronal_section1"
+      "path" : "/resources_test/task_spatially_variable_genes/mouse_brain_coronal",
+      "dest" : "resources_test/task_spatially_variable_genes/mouse_brain_coronal"
     }
   ],
   "info" : {
@@ -3123,7 +3123,7 @@ meta = [
     "type_info" : {
       "label" : "Split dataset",
       "summary" : "A spatially variable genes dataset processor.",
-      "description" : "Split the common dataset for the spatially_variable_genes task.\n"
+      "description" : "Split the common dataset.\n"
     }
   },
   "status" : "enabled",
@@ -3205,7 +3205,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/data_processors/split_dataset",
     "viash_version" : "0.9.0",
-    "git_commit" : "7ea5c927968c70ffdf8933829fecec695029fbcd",
+    "git_commit" : "af0d04c989ecfbab29621eadf9bf2b553535ae63",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3219,8 +3219,8 @@ meta = [
       "test_resources" : [
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/spatially_variable_genes/",
-          "dest" : "resources_test/spatially_variable_genes"
+          "path" : "s3://openproblems-data/resources_test/task_spatially_variable_genes/",
+          "dest" : "resources_test/task_spatially_variable_genes"
         },
         {
           "type" : "s3",

@@ -14,7 +14,7 @@ publish_dir_s3="s3://openproblems-nextflow/temp/results/$(date +%Y-%m-%d_%H-%M-%
 
 # write the parameters to file
 cat > /tmp/params.yaml << HERE
-input_states: $resources_test_s3/mouse_brain_coronal_section1_visium/state.yaml
+input_states: $resources_test_s3/mouse_brain_coronal/state.yaml
 rename_keys: 'input_dataset:output_dataset;input_solution:output_solution'
 output_state: "state.yaml"
 publish_dir: $publish_dir_s3
@@ -30,4 +30,4 @@ tw launch https://github.com/openproblems-bio/task_spatially_variable_genes.git 
   --params-file /tmp/params.yaml \
   --entry-name auto \
   --config common/nextflow_helpers/labels_tw.config \
-  --labels task_template,test
+  --labels task_spatially_variable_genes,test

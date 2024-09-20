@@ -204,12 +204,12 @@ function ViashHelp {
   echo "    --input_data"
   echo "        type: file, required parameter, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/dataset.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/dataset.h5ad"
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/output.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/output.h5ad"
   echo "        Anndata with estimated spatial variability score for each gene."
 }
 
@@ -499,9 +499,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "git+https://github.com/openproblems-bio/core#subdirectory=packages/python/openproblems"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spagft"
-LABEL org.opencontainers.image.created="2024-09-20T08:40:30Z"
+LABEL org.opencontainers.image.created="2024-09-20T11:39:26Z"
 LABEL org.opencontainers.image.source="https://github.com/jxLiu-bio/SpaGFT"
-LABEL org.opencontainers.image.revision="7ea5c927968c70ffdf8933829fecec695029fbcd"
+LABEL org.opencontainers.image.revision="af0d04c989ecfbab29621eadf9bf2b553535ae63"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

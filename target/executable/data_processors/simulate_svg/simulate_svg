@@ -176,12 +176,12 @@ function ViashHelp {
   echo "Arguments:"
   echo "    --input"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/common/mouse_brain_coronal_section1/dataset.h5ad"
+  echo "        example: resources_test/common/mouse_brain_coronal/dataset.h5ad"
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example:"
-  echo "resources_test/spatially_variable_genes/mouse_brain_coronal_section1/simulated_dataset.h5ad"
+  echo "resources_test/task_spatially_variable_genes/mouse_brain_coronal/simulated_dataset.h5ad"
   echo ""
   echo "    --gp_k"
   echo "        type: integer"
@@ -473,9 +473,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component data_processors simulate_svg"
-LABEL org.opencontainers.image.created="2024-09-20T08:40:31Z"
+LABEL org.opencontainers.image.created="2024-09-20T11:39:27Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatially_variable_genes"
-LABEL org.opencontainers.image.revision="7ea5c927968c70ffdf8933829fecec695029fbcd"
+LABEL org.opencontainers.image.revision="af0d04c989ecfbab29621eadf9bf2b553535ae63"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
