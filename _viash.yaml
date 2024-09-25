@@ -30,8 +30,8 @@ info:
       path: s3://openproblems-data/resources_test/task_spatially_variable_genes/
       dest: resources_test/task_spatially_variable_genes
     - type: s3
-      path: s3://openproblems-data/resources_test/common/
-      dest: resources_test/common
+      path: s3://openproblems-data/resources_test/common/mouse_brain_coronal/
+      dest: resources_test/common/mouse_brain_coronal
 
 authors: 
   - name: Zhijian Li
