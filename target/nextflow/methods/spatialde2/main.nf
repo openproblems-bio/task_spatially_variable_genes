@@ -3090,7 +3090,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/spatialde2",
     "viash_version" : "0.9.0",
-    "git_commit" : "af0d04c989ecfbab29621eadf9bf2b553535ae63",
+    "git_commit" : "121adf82f1345eec2e0f3184fa234bb1cd18d8f8",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
