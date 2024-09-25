@@ -13,7 +13,7 @@ DATASET_DIR=resources_test/task_spatially_variable_genes
 
 mkdir -p $DATASET_DIR
 
-echo "Running process_dataset"
+echo "Running process_datasets"
 nextflow run . \
   -main-script target/nextflow/workflows/process_datasets/main.nf \
   -c common/nextflow_helpers/labels_ci.config \
