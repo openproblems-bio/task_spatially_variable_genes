@@ -3116,7 +3116,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scgco",
     "viash_version" : "0.9.0",
-    "git_commit" : "121adf82f1345eec2e0f3184fa234bb1cd18d8f8",
+    "git_commit" : "a2cb02e6b6054ee0566843f2fd34fa6f63dc96ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3135,8 +3135,8 @@ meta = [
         },
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/common/",
-          "dest" : "resources_test/common"
+          "path" : "s3://openproblems-data/resources_test/common/mouse_brain_coronal/",
+          "dest" : "resources_test/common/mouse_brain_coronal"
         }
       ]
     },

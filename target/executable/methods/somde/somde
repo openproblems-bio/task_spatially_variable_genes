@@ -474,9 +474,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "somde" "scanpy==1.9.8" "pandas==2.2.1" "numpy==1.26.4" "scipy==1.11.4"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods somde"
-LABEL org.opencontainers.image.created="2024-09-25T07:06:07Z"
+LABEL org.opencontainers.image.created="2024-09-25T16:14:52Z"
 LABEL org.opencontainers.image.source="https://github.com/XuegongLab/somde"
-LABEL org.opencontainers.image.revision="121adf82f1345eec2e0f3184fa234bb1cd18d8f8"
+LABEL org.opencontainers.image.revision="a2cb02e6b6054ee0566843f2fd34fa6f63dc96ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
