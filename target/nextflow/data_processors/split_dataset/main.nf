@@ -3205,7 +3205,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/data_processors/split_dataset",
     "viash_version" : "0.9.0",
-    "git_commit" : "a2cb02e6b6054ee0566843f2fd34fa6f63dc96ce",
+    "git_commit" : "30a073f9138c235648b0158deeca01808b3efaef",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {

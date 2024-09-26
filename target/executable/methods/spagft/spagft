@@ -499,9 +499,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "git+https://github.com/openproblems-bio/core#subdirectory=packages/python/openproblems"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods spagft"
-LABEL org.opencontainers.image.created="2024-09-25T16:14:53Z"
+LABEL org.opencontainers.image.created="2024-09-26T08:07:12Z"
 LABEL org.opencontainers.image.source="https://github.com/jxLiu-bio/SpaGFT"
-LABEL org.opencontainers.image.revision="a2cb02e6b6054ee0566843f2fd34fa6f63dc96ce"
+LABEL org.opencontainers.image.revision="30a073f9138c235648b0158deeca01808b3efaef"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
