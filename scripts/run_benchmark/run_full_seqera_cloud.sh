@@ -55,7 +55,7 @@ param_list:
     input_states: "s3://openproblems-data/resources/task_spatially_variable_genes/datasets/zenodo_spatial/stereoseq/**/state.yaml"
     settings: '{"coord_type_moran_i": "generic", "coord_type_sepal": "grid", "max_neighs_sepal": 4}'
 
-rename_keys: 'input_dataset:output_dataset,input_solution:output_solution'
+rename_keys: 'input_dataset:output_dataset;input_solution:output_solution'
 output_state: "state.yaml"
 publish_dir: "$publish_dir"
 HERE
@@ -69,4 +69,4 @@ tw launch https://github.com/openproblems-bio/task_spatially_variable_genes.git 
   --params-file /tmp/params.yaml \
   --entry-name auto \
   --config common/nextflow_helpers/labels_tw.config \
-  --labels task_template,full
+  --labels task_spatially_variable_genes,full
