@@ -3323,7 +3323,7 @@ meta = [
       "repository" : {
         "type" : "github",
         "repo" : "openproblems-bio/openproblems",
-        "tag" : "main_build"
+        "tag" : "build/main"
       }
     },
     {
@@ -3345,7 +3345,7 @@ meta = [
       "type" : "github",
       "name" : "openproblems",
       "repo" : "openproblems-bio/openproblems",
-      "tag" : "main_build"
+      "tag" : "build/main"
     }
   ],
   "license" : "MIT",
@@ -3399,7 +3399,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0",
-    "git_commit" : "30a073f9138c235648b0158deeca01808b3efaef",
+    "git_commit" : "0d69e531dca759a0f53d9fa1535514723f15eafd",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3435,7 +3435,7 @@ meta = [
         "type" : "github",
         "name" : "openproblems",
         "repo" : "openproblems-bio/openproblems",
-        "tag" : "main_build"
+        "tag" : "build/main"
       }
     ],
     "viash_version" : "0.9.0",
@@ -3548,7 +3548,7 @@ meta["root_dir"] = getRootDir()
 include { verify_data_structure } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/main/nextflow/schema/verify_data_structure/main.nf"
 include { select_reference } from "${meta.resources_dir}/../../../nextflow/data_processors/select_reference/main.nf"
 include { simulate_svg } from "${meta.resources_dir}/../../../nextflow/data_processors/simulate_svg/main.nf"
-include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/main_build/nextflow/datasets/normalization/log_cp/main.nf"
+include { log_cp } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/datasets/normalization/log_cp/main.nf"
 include { split_dataset } from "${meta.resources_dir}/../../../nextflow/data_processors/split_dataset/main.nf"
 
 // inner workflow

@@ -3139,7 +3139,7 @@ meta = [
       "type" : "github",
       "name" : "openproblems",
       "repo" : "openproblems-bio/openproblems",
-      "tag" : "main_build"
+      "tag" : "build/main"
     }
   ],
   "license" : "MIT",
@@ -3205,7 +3205,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/data_processors/split_dataset",
     "viash_version" : "0.9.0",
-    "git_commit" : "30a073f9138c235648b0158deeca01808b3efaef",
+    "git_commit" : "0d69e531dca759a0f53d9fa1535514723f15eafd",
     "git_remote" : "https://github.com/openproblems-bio/task_spatially_variable_genes"
   },
   "package_config" : {
@@ -3241,7 +3241,7 @@ meta = [
         "type" : "github",
         "name" : "openproblems",
         "repo" : "openproblems-bio/openproblems",
-        "tag" : "main_build"
+        "tag" : "build/main"
       }
     ],
     "viash_version" : "0.9.0",

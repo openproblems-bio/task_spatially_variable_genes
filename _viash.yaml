@@ -72,4 +72,4 @@ repositories:
   - name: openproblems
     type: github
     repo: openproblems-bio/openproblems
-    tag: main_build
+    tag: build/main
