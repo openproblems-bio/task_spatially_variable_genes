@@ -1,0 +1,37 @@
+__merge__: ../../api/comp_method.yaml
+name: somde
+label: SOMDE
+summary: SOMDE is a scalable method for identifying spatially variable genes with
+  self-organizing map.
+description: |
+  SOMDE uses self-organizing map to cluster neighboring cells into nodes, and then uses a Gaussian process 
+  to fit the node-level spatial gene expression to identify SVgenes. Experiments show that SOMDE is about 
+  5 to 50 times faster than existing methods with comparable results. 
+  The adjustable resolution of SOMDE makes it the only method that can give results in about 
+  5 min in large datasets of more than 20 000 sequencing sites.
+references: 
+  doi: 10.1093/bioinformatics/btab471
+info:
+  preferred_normalization: counts
+links:
+  documentation: https://github.com/WhirlFirst/somde/blob/master/slide_seq0819_11_SOM.ipynb
+  repository: https://github.com/XuegongLab/somde
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - somde
+          - scanpy==1.9.8
+          - pandas==2.2.1
+          - numpy==1.26.4
+          - scipy==1.11.4
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

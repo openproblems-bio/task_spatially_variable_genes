@@ -1,0 +1,43 @@
+__merge__: ../../api/comp_method.yaml
+name: spanve
+label: Spanve
+summary: Spanve is a non-parametric statistical approach based on modeling space dependence as a distance of two distributions for detecting SV genes.
+description: |
+  The depiction of in situ gene expression through spatial transcriptomics facilitates the inference of cell 
+  function mechanisms. To build spatial maps of transcriptomes, the first and crucial step is to 
+  identify spatially variable (SV) genes. However, current methods fall short in dealing with 
+  large-scale spatial transcriptomics data and may result in a high false positive rate due to the 
+  modeling of gene expression into parametric distributions. 
+  This paper introduces Spanve (https://github.com/zjupgx/Spanve), a non-parametric statistical approach 
+  based on modeling space dependence as a distance of two distributions for detecting SV genes. 
+  The high computing efficiency and accuracy of Spanve is demonstrated through comprehensive benchmarking. 
+  Additionally, Spanve can detect clustering-friendly SV genes and spatially variable co-expression, 
+  facilitating the identification of spatial tissue domains by an imputation.   
+references: 
+  doi: 10.1101/2023.02.08.527623
+info:
+  preferred_normalization: counts
+links:
+  documentation: https://github.com/zjupgx/Spanve/blob/main/tutorial.ipynb
+  repository: https://github.com/zjupgx/Spanve
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: apt
+        packages: git
+      - type: docker
+        run: |
+          git clone https://github.com/gx-Cai/Spanve.git /opt/Spanve
+      - type: python
+        packages:
+          - /opt/Spanve
+          - numpy==1.26.4
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
