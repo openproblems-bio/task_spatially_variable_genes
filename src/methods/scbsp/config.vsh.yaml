@@ -1,0 +1,44 @@
+__merge__: ../../api/comp_method.yaml
+name: scbsp
+label: scBSP
+summary: scBSP identifies spatially variable genes via granularity-based spatial statistics.
+description: |
+  scBSP (single-cell BinSpect) detects spatially variable genes using a
+  granularity-based approach that tests for spatial patterns at multiple
+  resolutions. It bins spatial coordinates into grids at different
+  granularity levels and tests whether gene expression shows significant
+  spatial structure using a permutation-based statistical test. The method
+  is designed for large-scale spatial transcriptomics data.
+references:
+  bibtex:
+    - |
+      @article{li2024scbsp,
+        title={scBSP: A fast and accurate tool for identifying spatially variable
+               genes from spatial transcriptomic data},
+        author={Li, Jinpu and Shang, Yiqing and others},
+        journal={Bioinformatics},
+        year={2024}
+      }
+info:
+  preferred_normalization: counts
+links:
+  repository: https://github.com/juexinwang/scBSP
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - pandas
+          - numpy
+          - scipy
+          - anndata
+          - scbsp
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, lowcpu]
