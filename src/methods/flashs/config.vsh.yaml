@@ -1,0 +1,48 @@
+__merge__: ../../api/comp_method.yaml
+name: flashs
+label: FlashS
+summary: Ultra-fast SVG detection via random Fourier features and sparse sketching.
+description: |
+  FlashS (Frequency-domain Linearized Adaptive Spatial Hypothesis testing via
+  Sketching) detects spatially variable genes using random Fourier feature
+  projections of spatial coordinates. It employs a three-part test combining
+  binary (presence/absence), rank (intensity order), and direct (raw value)
+  spatial patterns across multiple bandwidth scales, merged via Cauchy
+  combination. The method achieves O(nnz * D) time and O(D) memory per gene,
+  where D is the number of Fourier features and nnz is the number of
+  expressing cells, making it scalable to millions of cells on standard
+  hardware.
+references:
+  bibtex:
+    - |
+      @article{yang2026flashs,
+        title={Frequency-domain sparse kernel testing enables scalable spatially
+               variable gene discovery with controlled inference at atlas scale},
+        author={Yang, Chen and Zhang, Xianyang and Chen, Jun},
+        year={2026}
+      }
+info:
+  preferred_normalization: counts
+links:
+  repository: https://github.com/cafferychen777/FlashS
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - pandas
+          - numpy
+          - scipy
+          - scikit-learn
+          - anndata
+          - numba
+          - git+https://github.com/cafferychen777/FlashS.git
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [lowtime, lowmem, lowcpu]
