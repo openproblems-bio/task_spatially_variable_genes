@@ -1,0 +1,48 @@
+__merge__: ../../api/comp_method.yaml
+name: hotspot
+label: Hotspot
+summary: Hotspot identifies informative genes using local autocorrelation statistics.
+description: |
+  Hotspot identifies spatially variable genes by computing local
+  autocorrelation statistics on a nearest-neighbor graph constructed from
+  spatial coordinates. It uses the DANB (depth-adjusted negative binomial)
+  model for count data and tests for significant spatial autocorrelation
+  via a permutation-based Z-test. Genes are scored by their Z-statistic
+  magnitude, weighted by statistical significance.
+references:
+  bibtex:
+    - |
+      @article{detomaso2021hotspot,
+        title={Hotspot identifies informative gene modules across modalities
+               of single-cell genomics},
+        author={DeTomaso, David and Yosef, Nir},
+        journal={Cell Systems},
+        volume={12},
+        number={5},
+        pages={446--456},
+        year={2021}
+      }
+info:
+  preferred_normalization: counts
+links:
+  documentation: https://hotspot.readthedocs.io/
+  repository: https://github.com/YosefLab/Hotspot
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - pandas
+          - numpy
+          - scipy
+          - anndata
+          - hotspotsc
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, lowcpu]
