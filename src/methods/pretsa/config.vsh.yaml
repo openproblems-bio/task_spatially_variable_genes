@@ -1,0 +1,43 @@
+__merge__: ../../api/comp_method.yaml
+name: pretsa
+label: PreTSA
+summary: B-spline basis spatial testing for spatially variable gene detection.
+description: |
+  PreTSA (Pre-Trained Spatial Analysis) detects spatially variable genes by
+  fitting B-spline basis functions to spatial coordinates and testing for
+  association between gene expression and the spatial basis via an F-test.
+  The method uses library-size-normalized, log-transformed expression data
+  and provides analytic p-values based on the F-statistic.
+references:
+  bibtex:
+    - |
+      @article{zhuang2026pretsa,
+        title={PreTSA: computationally efficient modeling of temporal and spatial
+               gene expression patterns},
+        author={Zhuang, Haotian and Ji, Zhicheng},
+        journal={Genome Biology},
+        year={2026}
+      }
+info:
+  preferred_normalization: counts
+links:
+  repository: https://github.com/zhiji-bio/PreTSA
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - pandas
+          - numpy
+          - scipy
+          - anndata
+          - pretsa-spatial
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [lowtime, midmem, lowcpu]
