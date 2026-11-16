@@ -1,0 +1,49 @@
+__merge__: ../../api/comp_method.yaml
+name: ams_svg
+label: AMS-SVG
+summary: Variance-stabilized adaptive multi-scale spatial autocorrelation with exact Cliff-Ord permutation standardization.
+description: |
+  AMS-SVG computes strictly gene-marginal spatial variability scores directly from
+  unnormalized raw counts and spatial coordinates without spot library-size division
+  or float64 p-value underflow clipping. Each gene column is mapped independently
+  through log1p and Freeman-Tukey variance-stabilizing transforms, evaluated across
+  three tie-free self-tuning compactly supported biweight kNN operators (local/meso
+  scales) and three O(2)-invariant low-rank Mercer polynomial-Gaussian operators
+  (macroscopic scales), and standardized by exact Cliff & Ord (1981) kurtosis-adjusted
+  analytical permutation moments in O(N k G) CPU time without GPU acceleration.
+references:
+  doi:
+    - 10.1093/biomet/37.1-2.17
+    - 10.1214/aoms/1177729756
+    - 10.1101/2023.12.02.569717
+  bibtex:
+    - |
+      @book{cliff1981spatial,
+        title={Spatial Processes: Models \& Applications},
+        author={Cliff, Andrew D. and Ord, J. Keith},
+        year={1981},
+        publisher={Pion}
+      }
+info:
+  preferred_normalization: counts
+links:
+  documentation: https://github.com/mizopl/we-star
+  repository: https://github.com/mizopl/we-star
+resources:
+  - type: python_script
+    path: script.py
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - numpy
+          - scipy
+          - pandas
+          - anndata
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [lowtime, lowmem, lowcpu]

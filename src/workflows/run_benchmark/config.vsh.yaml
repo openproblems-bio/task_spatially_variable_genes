@@ -70,6 +70,7 @@ dependencies:
     repository: core
   - name: control_methods/random_ranking
   - name: control_methods/true_ranking
+  - name: methods/ams_svg
   - name: methods/boostgp
   - name: methods/gpcounts
   - name: methods/moran_i
