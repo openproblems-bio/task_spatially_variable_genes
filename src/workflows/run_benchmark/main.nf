@@ -15,6 +15,7 @@ workflow run_wf {
   methods = [
     random_ranking,
     true_ranking, 
+    ams_svg,
     boostgp, 
     gpcounts,
     moran_i,

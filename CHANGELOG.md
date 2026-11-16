@@ -1,3 +1,9 @@
+# task_spatially_variable_genes dev
+
+## NEW FUNCTIONALITY
+
+* Added `methods/ams_svg` (`AMS-SVG`) pure-Python (`numpy`/`scipy`) variance-stabilized adaptive multi-scale spatial autocorrelation component on `openproblems/base_python:1.0.0` and wired it into `workflows/run_benchmark`.
+
 # task_template x.y.z
 
 ## BREAKING CHANGES
@@ -23,4 +29,3 @@
 * Updated `README.md` (PR #5).
 
 ## BUGFIXES
-
